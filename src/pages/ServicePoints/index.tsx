@@ -1,0 +1,183 @@
+import { ServicePoint } from "@/Generated/Raidv2";
+import SingletonServicePointApi from "@/SingletonServicePointApi";
+import BreadcrumbsBar from "@/components/BreadcrumbsBar";
+import ErrorAlertComponent from "@/components/ErrorAlertComponent";
+import LoadingPage from "@/pages/LoadingPage";
+import ServicePointCreateForm from "@/pages/ServicePoint/components/ServicePointCreateForm";
+import { Breadcrumb } from "@/types";
+import {
+  Cancel as CancelIcon,
+  CheckCircleOutline as CheckCircleOutlineIcon,
+  Home as HomeIcon,
+  Hub as HubIcon,
+  Key as KeyIcon,
+  People as PeopleIcon,
+} from "@mui/icons-material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Container,
+  Stack,
+} from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useKeycloak } from "@react-keycloak/web";
+import { useQuery } from "@tanstack/react-query";
+import { NavLink } from "react-router-dom";
+
+const columns: GridColDef[] = [
+  {
+    field: "id",
+    headerName: "ID",
+    width: 125,
+    renderCell: ({ value }) => {
+      return (
+        <NavLink to={`/service-points/${value}`}>
+          <Button
+            variant="outlined"
+            size="small"
+            fullWidth={true}
+            sx={{ textTransform: "none" }}
+          >
+            SP {value}
+          </Button>
+        </NavLink>
+      );
+    },
+  },
+  { field: "name", headerName: "Name", width: 350 },
+  { field: "prefix", headerName: "Prefix", width: 200 },
+  {
+    field: "users",
+    headerName: "Users",
+    renderCell: ({ row }) => {
+      return (
+        <NavLink to={`/list-app-user/${row.id}`}>
+          <Button
+            variant="outlined"
+            size="small"
+            fullWidth={true}
+            sx={{ textTransform: "none" }}
+          >
+            <PeopleIcon />
+          </Button>
+        </NavLink>
+      );
+    },
+  },
+  {
+    field: "apikeys",
+    headerName: "API Keys",
+    renderCell: ({ row }) => {
+      return (
+        <NavLink to={`/list-api-key/${row.id}`}>
+          <Button
+            variant="outlined"
+            size="small"
+            fullWidth={true}
+            sx={{ textTransform: "none" }}
+          >
+            <KeyIcon />
+          </Button>
+        </NavLink>
+      );
+    },
+  },
+  {
+    field: "enabled",
+    headerName: "Enabled?",
+    renderCell: ({ row }) => {
+      return row.enabled ? (
+        <CheckCircleOutlineIcon sx={{ color: "success.main" }} />
+      ) : (
+        <CancelIcon sx={{ color: "error.main" }} />
+      );
+    },
+  },
+];
+
+export default function ServicePoints() {
+  const servicePointApi = SingletonServicePointApi.getInstance();
+  const { initialized, keycloak } = useKeycloak();
+
+  const listServicePoints = async () => {
+    return servicePointApi.findAllServicePoints({
+      headers: {
+        Authorization: `Bearer ${keycloak.token}`,
+      },
+    });
+  };
+
+  const query = useQuery<ServicePoint[]>({
+    queryKey: ["servicePoints"],
+    queryFn: listServicePoints,
+    enabled: initialized && keycloak.authenticated,
+  });
+
+  if (query.isPending) {
+    return <LoadingPage />;
+  }
+
+  if (query.isError) {
+    return <ErrorAlertComponent error={query.error} />;
+  }
+
+  const breadcrumbs: Breadcrumb[] = [
+    {
+      label: "Home",
+      to: "/",
+      icon: <HomeIcon />,
+    },
+    {
+      label: "Service points",
+      to: "/service-points",
+      icon: <HubIcon />,
+    },
+  ];
+
+  return (
+    <Container>
+      <Stack direction="column" gap={2}>
+        <BreadcrumbsBar breadcrumbs={breadcrumbs} />
+        <Card variant="outlined">
+          <CardHeader title="Create new service point" />
+          <CardContent>
+            <ServicePointCreateForm />
+          </CardContent>
+        </Card>
+
+        <DataGrid
+          rows={query.data || []}
+          columns={columns}
+          rowSelection={false}
+          density="compact"
+          autoHeight
+          isRowSelectable={() => false}
+          initialState={{
+            sorting: {
+              sortModel: [{ field: "id", sort: "desc" }],
+            },
+            pagination: {
+              paginationModel: {
+                pageSize: 25,
+              },
+            },
+          }}
+          pageSizeOptions={[5, 10, 25, 50]}
+          disableRowSelectionOnClick
+          sx={{
+            // Neutralize the hover colour (causing a flash)
+            "& .MuiDataGrid-row.Mui-hovered": {
+              backgroundColor: "transparent",
+            },
+            // Take out the hover colour
+            "& .MuiDataGrid-row:hover": {
+              backgroundColor: "transparent",
+            },
+          }}
+        />
+      </Stack>
+    </Container>
+  );
+}

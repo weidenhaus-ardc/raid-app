@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/audiovisual.json",
+    "schema_id": 1
+  },
+  {
+    "id": 2,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/book-chapter.json",
+    "schema_id": 1
+  },
+  {
+    "id": 3,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/book.json",
+    "schema_id": 1
+  },
+  {
+    "id": 4,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/computational-notebook.json",
+    "schema_id": 1
+  },
+  {
+    "id": 5,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/conference-paper.json",
+    "schema_id": 1
+  },
+  {
+    "id": 6,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/conference-poster.json",
+    "schema_id": 1
+  },
+  {
+    "id": 7,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/conference-proceeding.json",
+    "schema_id": 1
+  },
+  {
+    "id": 8,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/data-paper.json",
+    "schema_id": 1
+  },
+  {
+    "id": 9,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/dataset.json",
+    "schema_id": 1
+  },
+  {
+    "id": 10,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/dissertation.json",
+    "schema_id": 1
+  },
+  {
+    "id": 11,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/educational-material.json",
+    "schema_id": 1
+  },
+  {
+    "id": 12,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/event.json",
+    "schema_id": 1
+  },
+  {
+    "id": 13,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/funding.json",
+    "schema_id": 1
+  },
+  {
+    "id": 14,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/image.json",
+    "schema_id": 1
+  },
+  {
+    "id": 15,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/instrument.json",
+    "schema_id": 1
+  },
+  {
+    "id": 16,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/journal-article.json",
+    "schema_id": 1
+  },
+  {
+    "id": 17,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/model.json",
+    "schema_id": 1
+  },
+  {
+    "id": 18,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/output-management-plan.json",
+    "schema_id": 1
+  },
+  {
+    "id": 19,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/physical-object.json",
+    "schema_id": 1
+  },
+  {
+    "id": 20,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/preprint.json",
+    "schema_id": 1
+  },
+  {
+    "id": 21,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/prize.json",
+    "schema_id": 1
+  },
+  {
+    "id": 22,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/report.json",
+    "schema_id": 1
+  },
+  {
+    "id": 23,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/service.json",
+    "schema_id": 1
+  },
+  {
+    "id": 24,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/software.json",
+    "schema_id": 1
+  },
+  {
+    "id": 25,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/sound.json",
+    "schema_id": 1
+  },
+  {
+    "id": 26,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/standard.json",
+    "schema_id": 1
+  },
+  {
+    "id": 27,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/text.json",
+    "schema_id": 1
+  },
+  {
+    "id": 28,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/type/v1/workflow.json",
+    "schema_id": 1
+  }
+]

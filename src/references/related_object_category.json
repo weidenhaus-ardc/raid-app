@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/category/v1/input.json",
+    "schema_id": 1
+  },
+  {
+    "id": 2,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/category/v1/internal.json",
+    "schema_id": 1
+  },
+  {
+    "id": 3,
+    "uri": "https://github.com/au-research/raid-metadata/blob/main/scheme/related-object/category/v1/output.json",
+    "schema_id": 1
+  }
+]
