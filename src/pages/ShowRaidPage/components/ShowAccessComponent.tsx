@@ -15,7 +15,8 @@ import dayjs from "dayjs";
 
 export default function ShowAccessComponent({ access }: { access: Access }) {
   const lang = language.find(
-    (language) => language.id === access?.statement?.language?.id
+    (language) =>
+      language.id.toString() === access?.statement?.language?.id?.toString()
   );
 
   return (

@@ -60,7 +60,9 @@ export default function ShowSubjectComponent({
                                 primary={el.text}
                                 secondary={
                                   language.find(
-                                    (lang) => lang.id === el?.language?.id
+                                    (lang) =>
+                                      lang.id.toString() ===
+                                      el?.language?.id?.toString()
                                   )?.name
                                 }
                               />

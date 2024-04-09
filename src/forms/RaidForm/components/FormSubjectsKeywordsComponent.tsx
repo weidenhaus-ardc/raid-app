@@ -167,7 +167,9 @@ export default function FormSubjectsKeywordsComponent({
                                       }
                                       value={
                                         language.find(
-                                          (lang) => lang.id === value
+                                          (lang) =>
+                                            lang.id.toString() ===
+                                            value?.toString()
                                         ) || null
                                       }
                                       onChange={(_, newValue) => {

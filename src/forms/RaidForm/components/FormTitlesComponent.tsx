@@ -183,7 +183,9 @@ export default function FormTitlesComponent({
                                     }
                                     value={
                                       language.find(
-                                        (lang) => lang.id === value
+                                        (lang) =>
+                                          lang.id.toString() ===
+                                          value?.toString()
                                       ) || null
                                     }
                                     onChange={(_, newValue) => {

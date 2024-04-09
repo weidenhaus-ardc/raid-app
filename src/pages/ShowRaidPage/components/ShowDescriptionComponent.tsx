@@ -34,7 +34,8 @@ export default function ShowDescriptionComponent({
           </Box>
           {description?.map((description, index) => {
             const lang = language.find(
-              (language) => language.id === description?.language?.id
+              (language) =>
+                language.id.toString() === description?.language?.id?.toString()
             );
             return (
               <Stack spacing={2} key={index}>

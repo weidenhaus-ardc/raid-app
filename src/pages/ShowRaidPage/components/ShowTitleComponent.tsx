@@ -35,7 +35,8 @@ export default function ShowTitleComponent({
           </Box>
           {titles?.map((title, index) => {
             const lang = language.find(
-              (language) => language.id === title?.language?.id
+              (language) =>
+                language.id.toString() === title?.language?.id?.toString()
             );
 
             return (

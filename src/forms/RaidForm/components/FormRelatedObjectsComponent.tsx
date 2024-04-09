@@ -136,7 +136,7 @@ export default function FormRelatedObjectsComponent({
                                     key={relatedObjectType.uri}
                                     value={relatedObjectType.uri}
                                   >
-                                    {relatedObjectType.name}
+                                    {relatedObjectType.uri}
                                   </MenuItem>
                                 ))}
                               </TextField>
