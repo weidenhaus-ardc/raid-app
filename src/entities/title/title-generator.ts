@@ -1,7 +1,5 @@
 import { Language, RaidDto, Title, TitleType } from "@/Generated/Raidv2";
-import languageSchema from "@/references/language_schema.json";
 import titleType from "@/references/title_type.json";
-import titleTypeSchema from "@/references/title_type_schema.json";
 import dayjs from "dayjs";
 import { UseFieldArrayReturn } from "react-hook-form";
 
@@ -14,14 +12,14 @@ const titleTypeGenerator = (
       : titleType.find((el) => el.uri.includes("primary"))?.uri) || "";
   return {
     id: typeId,
-    schemaUri: titleTypeSchema[0].uri,
+    schemaUri: "https://github.com/au-research/raid-metadata/tree/main/scheme/title/type/v1",
   };
 };
 
 const titleLanguageGenerator = (): Language => {
   return {
     id: "eng",
-    schemaUri: languageSchema[0].uri,
+    schemaUri: "https://www.iso.org/standard/39534.html",
   };
 };
 

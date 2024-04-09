@@ -1,6 +1,4 @@
 import contributorPosition from "@/references/contributor_position.json";
-import contributorPositionSchema from "@/references/contributor_position_schema.json";
-
 import contributorRole from "@/references/contributor_role.json";
 import contributorRoleSchema from "@/references/contributor_role_schema.json";
 import dayjs from "dayjs";
@@ -17,7 +15,7 @@ const contributorPositionGenerator = (): ContributorPosition => {
   );
 
   return {
-    schemaUri: contributorPositionSchema[0].uri,
+    schemaUri: "https://github.com/au-research/raid-metadata/tree/main/scheme/contributor/position/v1",
     id: contributorPosition[otherIndex].uri,
     startDate: dayjs().format("YYYY-MM-DD"),
   };

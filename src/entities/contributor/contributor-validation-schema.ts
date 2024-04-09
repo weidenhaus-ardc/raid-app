@@ -1,5 +1,3 @@
-import contributorPositionSchema from "@/references/contributor_position_schema.json";
-
 import contributorRoleSchema from "@/references/contributor_role_schema.json";
 
 import { combinedPattern } from "@/Util/DateUtil";
@@ -9,7 +7,7 @@ const contributorPositionValidationSchema = z
   .array(
     z.object({
       id: z.string(),
-      schemaUri: z.literal(contributorPositionSchema[0].uri),
+      schemaUri: z.literal("https://github.com/au-research/raid-metadata/tree/main/scheme/contributor/position/v1"),
       startDate: z.string().regex(combinedPattern).min(1),
       endDate: z.string().regex(combinedPattern).optional().nullable(),
     })

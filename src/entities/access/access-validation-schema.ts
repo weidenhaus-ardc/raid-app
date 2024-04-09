@@ -1,16 +1,14 @@
 import accessType from "@/references/access_type.json";
-import accessTypeSchema from "@/references/access_type_schema.json";
-import languageSchema from "@/references/language_schema.json";
 import { z } from "zod";
 
 const accessTypeValidationSchema = z.object({
   id: z.enum(accessType.map((type) => type.uri) as [string, ...string[]]),
-  schemaUri: z.literal(accessTypeSchema[0].uri),
+  schemaUri: z.literal("https://github.com/au-research/raid-metadata/tree/main/scheme/access/type/v1"),
 });
 
 const accessStatementLanguageValidationSchema = z.object({
   id: z.string().min(1),
-  schemaUri: z.literal(languageSchema[0].uri),
+  schemaUri: z.literal("https://www.iso.org/standard/39534.html"),
 });
 
 const accessStatementValidationSchema = z.object({

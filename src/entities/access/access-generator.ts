@@ -5,21 +5,19 @@ import {
   Language,
 } from "@/Generated/Raidv2";
 import accessType from "@/references/access_type.json";
-import accessTypeSchema from "@/references/access_type_schema.json";
-import languageSchema from "@/references/language_schema.json";
 import dayjs from "dayjs";
 
 const accessTypeGenerator = (): AccessType => {
   return {
     id: accessType[1].uri,
-    schemaUri: accessTypeSchema[0].uri,
+    schemaUri: "https://github.com/au-research/raid-metadata/tree/main/scheme/access/type/v1"
   };
 };
 
 const accessStatementLanguageGenerator = (): Language => {
   return {
     id: "eng",
-    schemaUri: languageSchema[0].uri,
+    schemaUri: "https://www.iso.org/standard/39534.html",
   };
 };
 
