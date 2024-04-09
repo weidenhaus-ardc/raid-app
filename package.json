@@ -23,6 +23,9 @@
     "@react-keycloak/web": "^3.4.0",
     "@tanstack/react-query": "^5.20.1",
     "@tanstack/react-query-devtools": "^5.20.1",
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.24",
     "clipboard-copy": "^4.0.1",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
@@ -35,10 +38,7 @@
     "react-hook-form": "^7.50.1",
     "react-router-dom": "^6.22.0",
     "vitest": "^1.2.2",
-    "zod": "^3.22.4",
-    "@types/node": "^20.11.17",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.24"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@playwright/test": "^1.43.0",
