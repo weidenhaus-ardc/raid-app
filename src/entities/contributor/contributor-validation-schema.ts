@@ -7,12 +7,13 @@ const contributorPositionValidationSchema = z
   .array(
     z.object({
       id: z.string(),
-      schemaUri: z.literal("https://github.com/au-research/raid-metadata/tree/main/scheme/contributor/position/v1"),
+      schemaUri: z.literal("https://vocabulary.raid.org/contributor.position.schema/305"),
       startDate: z.string().regex(combinedPattern).min(1),
       endDate: z.string().regex(combinedPattern).optional().nullable(),
     })
   )
   .max(1);
+  
 
 const contributorRoleValidationSchema = z.array(
   z.object({
