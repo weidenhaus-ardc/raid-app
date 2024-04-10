@@ -4,17 +4,13 @@ import {
   AccessType,
   Language,
 } from "@/Generated/Raidv2";
-import accessType from "@/references/access_type.json";
-import accessTypeSchema from "@/references/access_type_schema.json";
 import languageSchema from "@/references/language_schema.json";
 import dayjs from "dayjs";
 
-const latestAccessTypeSchemaId = Math.max(accessType.map((el) => el.schema_id).sort()[0]);
-
 const accessTypeGenerator = (): AccessType => {
   return {
-    id: accessType.filter((el) => el.schema_id === latestAccessTypeSchemaId)[0].uri,
-    schemaUri: accessTypeSchema.filter((el) => el.status === "active")[0].uri,
+    id: "https://vocabularies.coar-repositories.org/access_rights/c_abf2/",
+    schemaUri: "https://vocabularies.coar-repositories.org/access_rights/",
   };
 };
 

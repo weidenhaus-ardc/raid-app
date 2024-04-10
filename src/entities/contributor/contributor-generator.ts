@@ -15,7 +15,7 @@ const contributorPositionGenerator = (): ContributorPosition => {
   );
 
   return {
-    schemaUri: "https://github.com/au-research/raid-metadata/tree/main/scheme/contributor/position/v1",
+    schemaUri: "https://vocabulary.raid.org/contributor.position.schema/305",
     id: contributorPosition[otherIndex].uri,
     startDate: dayjs().format("YYYY-MM-DD"),
   };
