@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const titleTypeValidationSchema = z.object({
   id: z.enum(titleType.map((type) => type.uri) as [string, ...string[]]),
-  schemaUri: z.literal("https://github.com/au-research/raid-metadata/tree/main/scheme/title/type/v1"),
+  schemaUri: z.literal("https://vocabulary.raid.org/title.type.schema/376"),
 });
 
 const titleLanguageValidationSchema = z.object({
