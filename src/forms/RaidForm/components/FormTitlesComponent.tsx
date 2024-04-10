@@ -3,7 +3,6 @@ import { dateHelperText, dateHelperTextRequired } from "@/Util/DateUtil";
 import { titleGenerator } from "@/entities/title/title-generator";
 import language from "@/references/language.json";
 import titleType from "@/references/title_type.json";
-import { extractKeyFromIdUri } from "@/utils";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
@@ -161,7 +160,7 @@ export default function FormTitlesComponent({
                                     key={titleType.uri}
                                     value={titleType.uri}
                                   >
-                                    {extractKeyFromIdUri(titleType.uri)}
+                                    {titleType.uri}
                                   </MenuItem>
                                 ))}
                               </TextField>
@@ -179,12 +178,12 @@ export default function FormTitlesComponent({
                                   <Autocomplete
                                     options={language}
                                     getOptionLabel={(option) =>
-                                      `${option.id}: ${option.name}`
+                                      `${option.code}: ${option.name}`
                                     }
                                     value={
                                       language.find(
                                         (lang) =>
-                                          lang.id.toString() ===
+                                          lang.code.toString() ===
                                           value?.toString()
                                       ) || null
                                     }
@@ -192,7 +191,7 @@ export default function FormTitlesComponent({
                                       onChange(newValue ? newValue.id : "");
                                     }}
                                     isOptionEqualToValue={(option, value) => {
-                                      return option.id === value.id;
+                                      return option.code === value.code;
                                     }}
                                     renderInput={(params) => (
                                       <TextField
