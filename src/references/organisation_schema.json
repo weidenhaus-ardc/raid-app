@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
-    "uri": "https://ror.org/"
+    "uri": "https://ror.org/",
+    "status": "active"
   }
 ]

@@ -1,6 +1,12 @@
 [
   {
     "id": 1,
-    "uri": "https://github.com/au-research/raid-metadata/tree/main/scheme/access/type/v1/"
+    "uri": "https://github.com/au-research/raid-metadata/tree/main/scheme/access/type/v1/",
+    "status": "inactive"
+  },
+  {
+    "id": 2,
+    "uri": "https://vocabularies.coar-repositories.org/access_rights/",
+    "status": "active"
   }
 ]

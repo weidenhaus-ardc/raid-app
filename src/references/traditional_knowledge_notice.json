@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "uri": "https://localcontexts.org/notice/open-to-collaborate/",
+    "schema_id": 1
+  },
+  {
+    "id": 2,
+    "uri": "https://localcontexts.org/notice/authorization/",
+    "schema_id": 2
+  },
+  {
+    "id": 3,
+    "uri": "https://localcontexts.org/notice/belonging/",
+    "schema_id": 2
+  },
+  {
+    "id": 4,
+    "uri": "https://localcontexts.org/notice/caring/",
+    "schema_id": 2
+  },
+  {
+    "id": 5,
+    "uri": "https://localcontexts.org/notice/gender-aware/",
+    "schema_id": 2
+  },
+  {
+    "id": 6,
+    "uri": "https://localcontexts.org/notice/leave-undisturbed/",
+    "schema_id": 2
+  },
+  {
+    "id": 7,
+    "uri": "https://localcontexts.org/notice/safety/",
+    "schema_id": 2
+  },
+  {
+    "id": 8,
+    "uri": "https://localcontexts.org/notice/viewing/",
+    "schema_id": 2
+  },
+  {
+    "id": 9,
+    "uri": "https://localcontexts.org/notice/withholding/",
+    "schema_id": 2
+  },
+  {
+    "id": 10,
+    "uri": "https://localcontexts.org/notice/attribution-incomplete/",
+    "schema_id": 3
+  },
+  {
+    "id": 11,
+    "uri": "https://localcontexts.org/notice/bc-notice/",
+    "schema_id": 3
+  },
+  {
+    "id": 12,
+    "uri": "https://localcontexts.org/notice/tk-notice/",
+    "schema_id": 3
+  }
+]

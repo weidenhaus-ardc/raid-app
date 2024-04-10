@@ -1,6 +1,12 @@
 [
   {
     "id": 1,
-    "uri": "https://iso639-3.sil.org"
+    "uri": "https://iso639-3.sil.org",
+    "status": "inactive"
+  },
+  {
+    "id": 2,
+    "uri": "https://www.iso.org/standard/74575.html",
+    "status": "active"
   }
 ]
