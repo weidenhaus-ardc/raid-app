@@ -9,17 +9,19 @@ import accessTypeSchema from "@/references/access_type_schema.json";
 import languageSchema from "@/references/language_schema.json";
 import dayjs from "dayjs";
 
+const latestAccessTypeSchemaId = Math.max(accessType.map((el) => el.schema_id).sort()[0]);
+
 const accessTypeGenerator = (): AccessType => {
   return {
-    id: accessType[1].uri,
-    schemaUri: accessTypeSchema[1].uri
+    id: accessType.filter((el) => el.schema_id === latestAccessTypeSchemaId)[0].uri,
+    schemaUri: accessTypeSchema.filter((el) => el.status === "active")[0].uri,
   };
 };
 
 const accessStatementLanguageGenerator = (): Language => {
   return {
     id: "eng",
-    schemaUri: languageSchema[0].uri,
+    schemaUri: languageSchema.filter((el) => el.status === "active")[0].uri
   };
 };
 

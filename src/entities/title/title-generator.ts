@@ -1,36 +1,26 @@
-import { Language, RaidDto, Title, TitleType } from "@/Generated/Raidv2";
-import titleType from "@/references/title_type.json";
+import { Language, Title, TitleType } from "@/Generated/Raidv2";
 import dayjs from "dayjs";
-import { UseFieldArrayReturn } from "react-hook-form";
 
-const titleTypeGenerator = (
-  titlesFieldArray?: UseFieldArrayReturn<RaidDto, "title">
-): TitleType => {
-  const typeId =
-    (titlesFieldArray?.fields && titlesFieldArray?.fields?.length > 0
-      ? titleType.find((el) => el.uri.includes("alternative"))?.uri
-      : titleType.find((el) => el.uri.includes("primary"))?.uri) || "";
+const titleTypeGenerator = (): TitleType => {
   return {
-    id: typeId,
-    schemaUri: "https://github.com/au-research/raid-metadata/tree/main/scheme/title/type/v1",
+    id: "https://vocabulary.raid.org/title.type.schema/5",
+    schemaUri: "https://vocabulary.raid.org/title.type.schema/376",
   };
 };
 
 const titleLanguageGenerator = (): Language => {
   return {
     id: "eng",
-    schemaUri: "https://www.iso.org/standard/39534.html",
+    schemaUri: "https://www.iso.org/standard/74575.html",
   };
 };
 
-export const titleGenerator = (
-  titlesFieldArray?: UseFieldArrayReturn<RaidDto, "title">
-): Title => {
+export const titleGenerator = (): Title => {
   const todaysDate = dayjs(new Date()).format("YYYY-MM-DD");
 
   return {
     text: `Example title... ${new Date().toLocaleTimeString()}`,
-    type: titleTypeGenerator(titlesFieldArray),
+    type: titleTypeGenerator(),
     language: titleLanguageGenerator(),
     startDate: todaysDate,
     endDate: undefined,

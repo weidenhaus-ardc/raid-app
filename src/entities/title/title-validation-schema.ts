@@ -9,7 +9,7 @@ const titleTypeValidationSchema = z.object({
 
 const titleLanguageValidationSchema = z.object({
   id: z.string().min(1),
-  schemaUri: z.literal("https://www.iso.org/standard/39534.html"),
+  schemaUri: z.literal("https://www.iso.org/standard/74575.html"),
 });
 
 export const titleValidationSchema = z
