@@ -46,7 +46,7 @@ export default function FormTitlesComponent({
   });
 
   const handleAddTitle = useCallback(() => {
-    titlesFieldArray.append(titleGenerator(titlesFieldArray));
+    titlesFieldArray.append(titleGenerator());
     trigger("title");
   }, [titlesFieldArray, trigger]);
 
