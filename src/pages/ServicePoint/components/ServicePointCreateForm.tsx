@@ -1,4 +1,6 @@
+import SingletonServicePointApi from "@/SingletonServicePointApi";
 import type { CreateServicePointRequest } from "@/generated/raid";
+import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -16,6 +18,8 @@ import { z } from "zod";
 
 export default function ServicePointCreateForm() {
   const queryClient = useQueryClient();
+  const api = SingletonServicePointApi.getInstance();
+  const { keycloak } = useCustomKeycloak();
 
   const initalServicePointValues: CreateServicePointRequest = {
     servicePointCreateRequest: {
@@ -28,7 +32,7 @@ export default function ServicePointCreateForm() {
       prefix: "",
       repositoryId: "",
       appWritesEnabled: false,
-      groupId: "169bd3f3-dd42-4ac0-b89a-fb49648e5eff",
+      groupId: "",
     },
   };
 
@@ -67,9 +71,12 @@ export default function ServicePointCreateForm() {
   const createServicePoint = async (
     servicePoint: CreateServicePointRequest
   ) => {
-    // return await api.servicePoint.createServicePoint(servicePoint);
-    console.log(servicePoint);
-    return null;
+    return await api.createServicePoint(servicePoint, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${keycloak.token}`,
+      },
+    });
   };
 
   const createServicePointMutation = useMutation({
@@ -157,6 +164,26 @@ export default function ServicePointCreateForm() {
                     value={field.value}
                     error={
                       !!form.formState.errors?.servicePointCreateRequest?.prefix
+                    }
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Controller
+                name="servicePointCreateRequest.groupId"
+                control={form.control}
+                render={({ field }) => (
+                  <TextField
+                    label="Group ID"
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                    {...field}
+                    value={field.value}
+                    error={
+                      !!form.formState.errors?.servicePointCreateRequest
+                        ?.groupId
                     }
                   />
                 )}

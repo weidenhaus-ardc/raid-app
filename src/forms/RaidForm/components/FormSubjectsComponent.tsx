@@ -57,7 +57,6 @@ function SubjectRootField({
       control={control}
       name={`subject.${subjectsArrayIndex}`}
       render={({ field: { onChange, ...controllerField } }) => {
-        console.log("controllerField?.value?.id", controllerField?.value?.id);
         const subjectTitle = controllerField?.value?.id
           ? subjectType.find(
               (type) => type.id.toString() === controllerField?.value?.id

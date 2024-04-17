@@ -1,5 +1,6 @@
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
 import useSnackbar from "@/components/Snackbar/useSnackbar";
+import { ServicePoint } from "@/generated/raid";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import LoadingPage from "@/pages/LoadingPage";
 
@@ -8,7 +9,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Chip,
   Paper,
   Stack,
@@ -37,7 +37,11 @@ const VITE_KEYCLOAK_REALM = import.meta.env.VITE_KEYCLOAK_REALM as string;
 
 const url = `${VITE_KEYCLOAK_URL}/realms/${VITE_KEYCLOAK_REALM}/group`;
 
-export default function ServicePointUsers() {
+export default function ServicePointUsers({
+  servicePoint,
+}: {
+  servicePoint?: ServicePoint;
+}) {
   const { keycloak } = useCustomKeycloak();
 
   const queryClient = useQueryClient();
@@ -105,11 +109,7 @@ export default function ServicePointUsers() {
 
   return (
     <>
-      <Card key={query.data.id}>
-        <CardHeader
-          title={query.data.name}
-          subheader={query.data.attributes.servicePointId!}
-        />
+      <Card>
         <CardContent>
           <TableContainer
             component={Paper}
@@ -131,84 +131,85 @@ export default function ServicePointUsers() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {query.data.members.map((member: Member) => {
-                  return (
-                    <TableRow
-                      key={member.id}
-                      sx={{
-                        "&:last-child td, &:last-child th": {
-                          border: 0,
-                        },
-                      }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {member.attributes.firstName}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {member.attributes.lastName}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {member.attributes.username}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {member.attributes.email}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        <Stack direction="column" spacing={1}>
-                          {member?.roles?.map((el: string) => (
-                            <Chip
-                              key={el}
-                              variant="outlined"
-                              color="success"
-                              size="small"
-                              label={el}
-                            />
-                          ))}
-                        </Stack>
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        <Button
-                          size="small"
-                          variant="outlined"
-                          color="success"
-                          startIcon={<CheckIcon />}
-                          disabled={member?.roles?.includes(
-                            "service-point-user"
-                          )}
-                          onClick={() => {
-                            modifyUserAccessMutation.mutate({
-                              userId: member.id,
-                              userGroupId: query.data.id,
-                              operation: "grant",
-                            });
-                          }}
-                        >
-                          Grant
-                        </Button>
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        <Button
-                          size="small"
-                          variant="outlined"
-                          color="error"
-                          startIcon={<CancelIcon />}
-                          disabled={
-                            !member?.roles?.includes("service-point-user")
-                          }
-                          onClick={() => {
-                            modifyUserAccessMutation.mutate({
-                              userId: member.id,
-                              userGroupId: query.data.id,
-                              operation: "revoke",
-                            });
-                          }}
-                        >
-                          Revoke
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {query.data.id === servicePoint?.groupId &&
+                  query.data.members.map((member: Member) => {
+                    return (
+                      <TableRow
+                        key={member.id}
+                        sx={{
+                          "&:last-child td, &:last-child th": {
+                            border: 0,
+                          },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {member.attributes.firstName}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {member.attributes.lastName}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {member.attributes.username}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {member.attributes.email}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          <Stack direction="column" spacing={1}>
+                            {member?.roles?.map((el: string) => (
+                              <Chip
+                                key={el}
+                                variant="outlined"
+                                color="success"
+                                size="small"
+                                label={el}
+                              />
+                            ))}
+                          </Stack>
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          <Button
+                            size="small"
+                            variant="outlined"
+                            color="success"
+                            startIcon={<CheckIcon />}
+                            disabled={member?.roles?.includes(
+                              "service-point-user"
+                            )}
+                            onClick={() => {
+                              modifyUserAccessMutation.mutate({
+                                userId: member.id,
+                                userGroupId: query.data.id,
+                                operation: "grant",
+                              });
+                            }}
+                          >
+                            Grant
+                          </Button>
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          <Button
+                            size="small"
+                            variant="outlined"
+                            color="error"
+                            startIcon={<CancelIcon />}
+                            disabled={
+                              !member?.roles?.includes("service-point-user")
+                            }
+                            onClick={() => {
+                              modifyUserAccessMutation.mutate({
+                                userId: member.id,
+                                userGroupId: query.data.id,
+                                operation: "revoke",
+                              });
+                            }}
+                          >
+                            Revoke
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
           </TableContainer>

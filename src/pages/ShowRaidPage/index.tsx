@@ -47,7 +47,6 @@ export default function ShowRaidPage({ version }: { version?: number }) {
   }
 
   const raidData = readQuery.data;
-  console.log(raidData);
 
   return (
     <ShowRaidPageContent raidData={raidData!} handle={handle} versionLabel="" />

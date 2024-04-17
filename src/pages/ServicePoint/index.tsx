@@ -87,7 +87,7 @@ export default function ServicePoint() {
       <Card variant="outlined" sx={{ mt: 2 }}>
         <CardHeader title="Service point users" />
         <CardContent>
-          <ServicePointUsers />
+          <ServicePointUsers servicePoint={query.data} />
         </CardContent>
       </Card>
     </Container>

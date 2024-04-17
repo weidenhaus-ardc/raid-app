@@ -44,6 +44,7 @@ export default function ServicePointUpdateForm({
       techEmail: z.string(),
       enabled: z.boolean(),
       prefix: z.string(),
+      groupId: z.string(),
       repositoryId: z.string(),
       appWritesEnabled: z.boolean(),
       password: z.string().min(8),
@@ -166,6 +167,25 @@ export default function ServicePointUpdateForm({
                     value={field.value}
                     error={
                       !!form.formState.errors?.servicePointUpdateRequest?.prefix
+                    }
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Controller
+                name="servicePointUpdateRequest.groupId"
+                control={form.control}
+                render={({ field }) => (
+                  <TextField
+                    label="Group ID"
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                    {...field}
+                    value={field.value}
+                    error={
+                      !!form.formState.errors?.servicePointUpdateRequest?.groupId
                     }
                   />
                 )}
