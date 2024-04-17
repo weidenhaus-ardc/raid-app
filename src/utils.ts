@@ -15,11 +15,11 @@ import {
   Subject,
   Title,
   TraditionalKnowledgeLabel,
-} from "./Generated/Raidv2";
-import { accessGenerator } from "./entities/access/access-generator";
-import { contributorGenerator } from "./entities/contributor/contributor-generator";
-import { dateGenerator } from "./entities/date/date-generator";
-import { titleGenerator } from "./entities/title/title-generator";
+} from "@/generated/raid";
+import { accessGenerator } from "@/entities/access/access-generator";
+import { contributorGenerator } from "@/entities/contributor/contributor-generator";
+import { dateGenerator } from "@/entities/date/date-generator";
+import { titleGenerator } from "@/entities/title/title-generator";
 
 export const raidRequest = (data: RaidDto): RaidDto => {
   return {

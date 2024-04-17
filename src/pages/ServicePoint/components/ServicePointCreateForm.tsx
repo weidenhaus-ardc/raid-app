@@ -28,6 +28,7 @@ export default function ServicePointCreateForm() {
       prefix: "",
       repositoryId: "",
       appWritesEnabled: false,
+      groupId: "169bd3f3-dd42-4ac0-b89a-fb49648e5eff",
     },
   };
 
