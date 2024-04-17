@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export const spatialCoverageValidationSchema = z.array(
-  z
-    .object({
+export const spatialCoverageValidationSchema = z
+  .array(
+    z.object({
       id: z.string().min(1),
       schemaUri: z.string().min(1),
       place: z.array(
@@ -15,5 +15,5 @@ export const spatialCoverageValidationSchema = z.array(
         })
       ),
     })
-    .optional()
-);
+  )
+  .optional();
