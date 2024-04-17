@@ -13,8 +13,8 @@
  */
 
 
-// export const BASE_PATH = "https://api.prod.raid.org.au".replace(/\/+$/, "");
-export const BASE_PATH = "http://localhost:8080".replace(/\/+$/, "");
+export const BASE_PATH = "https://api.test.raid.org.au".replace(/\/+$/, "");
+// export const BASE_PATH = "http://localhost:8080".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
     basePath?: string; // override base path
