@@ -1,7 +1,8 @@
-import { RelatedObject } from "@/Generated/Raidv2";
-import { extractKeyFromIdUri } from "@/utils";
+import { relatedObjectCategoryMapping, relatedObjectTypeMapping } from "@/entities/related-object/related-object-mapping";
+import { RelatedObject } from "@/generated/raid";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -9,6 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function ShowRelatedObjectComponent({
   relatedObject,
@@ -40,13 +42,15 @@ export default function ShowRelatedObjectComponent({
                       <Box>
                         <Typography variant="body2">ID</Typography>
                         <Typography color="text.secondary" variant="body1">
-                          <a
-                            href={relatedObject.id}
+                          <Button
+                            variant="text"
+                            component={Link}
+                            to={relatedObject.id || ""}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             {relatedObject.id}
-                          </a>
+                          </Button>
                         </Typography>
                       </Box>
                     </Grid>
@@ -54,7 +58,12 @@ export default function ShowRelatedObjectComponent({
                       <Box>
                         <Typography variant="body2">Type</Typography>
                         <Typography color="text.secondary" variant="body1">
-                          {extractKeyFromIdUri(relatedObject.type?.id)}
+                          {
+                            relatedObjectTypeMapping[
+                              relatedObject.type
+                                ?.id as keyof typeof relatedObjectTypeMapping
+                            ]
+                          }
                         </Typography>
                       </Box>
                     </Grid>
@@ -62,9 +71,11 @@ export default function ShowRelatedObjectComponent({
                       <Box>
                         <Typography variant="body2">Category</Typography>
                         <Typography color="text.secondary" variant="body1">
-                          {relatedObject.category
-                            ?.map((el) => extractKeyFromIdUri(el.id))
-                            .join(", ")}
+                          {relatedObject?.category &&
+                            relatedObjectCategoryMapping[
+                              relatedObject?.category[0]
+                                .id as keyof typeof relatedObjectCategoryMapping
+                            ]}
                         </Typography>
                       </Box>
                     </Grid>

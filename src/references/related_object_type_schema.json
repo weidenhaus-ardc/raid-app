@@ -1,10 +1,5 @@
 [
   {
-    "id": 1,
-    "uri": "https://github.com/au-research/raid-metadata/tree/main/scheme/related-object/type/v1/",
-    "status": "inactive"
-  },
-  {
     "id": 2,
     "uri": "https://vocabulary.raid.org/relatedObject.type.schema/329",
     "status": "active"

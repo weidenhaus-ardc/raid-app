@@ -1,4 +1,4 @@
-import { FindRaidByNameRequest, RaidDto } from "@/Generated/Raidv2";
+import { FindRaidByNameRequest, RaidDto } from "@/generated/raid";
 import SingletonRaidApi from "@/SingletonRaidApi";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";

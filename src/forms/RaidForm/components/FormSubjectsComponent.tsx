@@ -1,4 +1,4 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
@@ -27,7 +27,6 @@ import {
 import subjectType from "@/references/subject_type.json";
 
 import { subjectGenerator } from "@/entities/subject/subject-generator";
-import { extractLastUrlSegment } from "@/utils";
 import { useCallback } from "react";
 import FormSubjectsKeywordsComponent from "./FormSubjectsKeywordsComponent";
 
@@ -58,9 +57,11 @@ function SubjectRootField({
       control={control}
       name={`subject.${subjectsArrayIndex}`}
       render={({ field: { onChange, ...controllerField } }) => {
+        console.log("controllerField?.value?.id", controllerField?.value?.id);
         const subjectTitle = controllerField?.value?.id
-          ? subjectType.find((type) => type.id === controllerField?.value?.id)
-              ?.name
+          ? subjectType.find(
+              (type) => type.id.toString() === controllerField?.value?.id
+            )?.name
           : `Subject ${subjectsArrayIndex + 1}`;
 
         return (
@@ -85,24 +86,40 @@ function SubjectRootField({
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={12}>
                       <Autocomplete
+                        options={subjectType}
+                        value={subjectType.find(
+                          (el) => el.id === controllerField?.value?.id
+                        )}
+                        getOptionLabel={(option) => option.name}
+                        onChange={(_, newValue) => onChange(newValue)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            key={params.id}
+                            size="small"
+                            label="Subject ID"
+                          />
+                        )}
+                      />
+                      {/* <Autocomplete
                         options={subjectType.sort((a, b) =>
                           a.name.localeCompare(b.name)
                         )}
                         getOptionLabel={(option) => {
-                          return `${extractLastUrlSegment(option.id)}: ${
-                            option.name
-                          }`;
+                          return `${option.id}: ${option.name}`;
                         }}
                         value={
                           subjectType.find(
-                            (type) => type.id === controllerField?.value?.id
+                            (type) =>
+                              type.id.toString() === `https://linked.data.gov.au/def/anzsrc-for/2020/${controllerField?.value?.id}`
                           ) || null
                         }
                         onChange={(_, newValue) => {
-                          onChange({
+                          const updatedValue = {
                             ...controllerField?.value,
-                            id: newValue?.id,
-                          });
+                            id: newValue?.id.replace("https://linked.data.gov.au/def/anzsrc-for/2020/", ""),
+                          };
+                          onChange(updatedValue);
                         }}
                         isOptionEqualToValue={(option, value) => {
                           return option.id === value.id;
@@ -115,7 +132,7 @@ function SubjectRootField({
                             label="Subject ID"
                           />
                         )}
-                      />
+                      /> */}
                     </Grid>
                   </Grid>
 

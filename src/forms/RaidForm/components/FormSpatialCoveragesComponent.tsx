@@ -1,12 +1,11 @@
-import { RaidDto } from "@/Generated/Raidv2";
-import language from "@/references/language.json";
+import { spatialCoverageGenerator } from "@/entities/spatial-coverage/spatial-coverage-generator";
+import { RaidDto } from "@/generated/raid";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   InfoOutlined as InfoOutlinedIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
 } from "@mui/icons-material";
 import {
-  Autocomplete,
   Box,
   Card,
   CardContent,
@@ -16,17 +15,16 @@ import {
   Stack,
   TextField,
   Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
+import { useCallback } from "react";
 import {
   Control,
   Controller,
   FieldErrors,
   useFieldArray,
 } from "react-hook-form";
-
-import { spatialCoverageGenerator } from "@/entities/spatial-coverage/spatial-coverage-generator";
-import { useCallback } from "react";
+import LanguageSelector from "./reusable-inputs/LanguageSelector";
 
 export default function FormSpatialCoveragesComponent({
   control,
@@ -166,48 +164,9 @@ export default function FormSpatialCoveragesComponent({
                             </Grid>
 
                             <Grid item xs={12} sm={6} md={4}>
-                              <Controller
+                              <LanguageSelector
                                 name={`description.${index}.language.id`}
                                 control={control}
-                                defaultValue=""
-                                rules={{ required: true }}
-                                render={({
-                                  field: { onChange, value },
-                                  fieldState: { error },
-                                }) => (
-                                  <Autocomplete
-                                    options={language}
-                                    getOptionLabel={(option) =>
-                                      `${option.id}: ${option.name}`
-                                    }
-                                    value={
-                                      language.find(
-                                        (lang) =>
-                                          lang.id.toString() ===
-                                          value?.toString()
-                                      ) || null
-                                    }
-                                    onChange={(_, newValue) => {
-                                      onChange(newValue ? newValue.id : "");
-                                    }}
-                                    isOptionEqualToValue={(option, value) => {
-                                      return option.id === value.id;
-                                    }}
-                                    renderInput={(params) => (
-                                      <TextField
-                                        {...params}
-                                        size="small"
-                                        label="Description Language"
-                                        error={!!error}
-                                        helperText={
-                                          error
-                                            ? "This field is required"
-                                            : null
-                                        }
-                                      />
-                                    )}
-                                  />
-                                )}
                               />
                             </Grid>
                           </Grid>

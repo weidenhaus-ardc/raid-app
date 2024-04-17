@@ -2,7 +2,7 @@ import {
   Language,
   SpatialCoverage,
   SpatialCoveragePlace,
-} from "@/Generated/Raidv2";
+} from "@/generated/raid";
 import languageSchema from "@/references/language_schema.json";
 
 const spatialCoveragePlaceLanguageGenerator = (): Language => {

@@ -1,7 +1,6 @@
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
 import useSnackbar from "@/components/Snackbar/useSnackbar";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
-import keycloak from "@/keycloak";
 import LoadingPage from "@/pages/LoadingPage";
 
 import { Cancel as CancelIcon, Check as CheckIcon } from "@mui/icons-material";
@@ -38,22 +37,22 @@ const VITE_KEYCLOAK_REALM = import.meta.env.VITE_KEYCLOAK_REALM as string;
 
 const url = `${VITE_KEYCLOAK_URL}/realms/${VITE_KEYCLOAK_REALM}/group`;
 
-async function fetchServicePointUsers() {
-  const response = await fetch(url, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      Authorization: `Bearer ${keycloak.token}`,
-    },
-  });
-  return response.json();
-}
-
 export default function ServicePointUsers() {
   const { keycloak } = useCustomKeycloak();
 
   const queryClient = useQueryClient();
   const snackbar = useSnackbar();
+
+  async function fetchServicePointUsers() {
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${keycloak.token}`,
+      },
+    });
+    return response.json();
+  }
 
   const query = useQuery({
     queryKey: ["servicePointUsers"],

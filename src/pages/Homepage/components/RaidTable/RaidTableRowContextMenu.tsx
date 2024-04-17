@@ -1,4 +1,4 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import React from "react";
 
 import {
@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import copy from "clipboard-copy";
+import { Link } from "react-router-dom";
 
 export default function RaidTableRowContextMenu({ row }: { row: RaidDto }) {
   const [prefix, setPrefix] = React.useState<string>("");
@@ -74,23 +75,13 @@ export default function RaidTableRowContextMenu({ row }: { row: RaidDto }) {
           />
         </MenuItem>
         <Divider />
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            window.location.href = `/show-raid/${prefix}/${suffix}`;
-          }}
-        >
+        <MenuItem component={Link} to={`/raids/${prefix}/${suffix}`}>
           <ListItemIcon>
             <VisibilityIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Show RAiD</ListItemText>
         </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            window.location.href = `/edit-raid/${prefix}/${suffix}`;
-          }}
-        >
+        <MenuItem component={Link} to={`/raids/${prefix}/${suffix}/edit`}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>

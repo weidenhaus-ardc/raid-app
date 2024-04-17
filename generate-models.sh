@@ -35,10 +35,10 @@ cp -r "${repoPath}/api-svc/idl-raid-v2/src/"* "${openapiPath}/" && echo "Copied 
 npx openapi-generator-cli generate --skip-validate-spec -i "${openapiPath}/raido-openapi-3.0.yaml" -g typescript-fetch -o ${outputPath} && echo "API client generated successfully" || { echo "Error generating API client"; exit 1; }
 
 
-rm -rf ./src/Generated/Raidv2
-mkdir -p ./src/Generated/Raidv2
+rm -rf ./src/generated/raid
+mkdir -p ./src/generated/raid
 
-cp -r "${outputPath}/"* ./src/Generated/Raidv2 && echo "Copied src to openapiPath successfully" || { echo "Error copying files"; exit 1; }
+cp -r "${outputPath}/"* ./src/generated/raid && echo "Copied src to openapiPath successfully" || { echo "Error copying files"; exit 1; }
 
 # Clean up any existing raid-* directories in tmp
 rm -rf /$TMPDIR/raid*

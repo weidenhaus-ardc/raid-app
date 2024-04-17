@@ -1,4 +1,4 @@
-import { ServicePoint } from "@/Generated/Raidv2";
+import { ServicePoint } from "@/generated/raid";
 import SingletonServicePointApi from "@/SingletonServicePointApi";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";

@@ -3,21 +3,23 @@ import {
   AccessStatement,
   AccessType,
   Language,
-} from "@/Generated/Raidv2";
+} from "@/generated/raid";
 import languageSchema from "@/references/language_schema.json";
+import accessType from "@/references/access_type.json";
+import accessTypeSchema from "@/references/access_type_schema.json";
 import dayjs from "dayjs";
 
 const accessTypeGenerator = (): AccessType => {
   return {
-    id: "https://vocabularies.coar-repositories.org/access_rights/c_abf2/",
-    schemaUri: "https://vocabularies.coar-repositories.org/access_rights/",
+    id: accessType[0].uri,
+    schemaUri: accessTypeSchema[0].uri,
   };
 };
 
 const accessStatementLanguageGenerator = (): Language => {
   return {
     id: "eng",
-    schemaUri: languageSchema.filter((el) => el.status === "active")[0].uri
+    schemaUri: languageSchema.filter((el) => el.status === "active")[0].uri,
   };
 };
 

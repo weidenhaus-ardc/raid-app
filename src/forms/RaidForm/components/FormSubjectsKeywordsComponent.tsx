@@ -1,12 +1,10 @@
-import { RaidDto, SubjectKeyword } from "@/Generated/Raidv2";
-import language from "@/references/language.json";
+import { RaidDto, SubjectKeyword } from "@/generated/raid";
 import languageSchema from "@/references/language_schema.json";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
 } from "@mui/icons-material";
 import {
-  Autocomplete,
   Card,
   CardContent,
   CardHeader,
@@ -15,7 +13,7 @@ import {
   Stack,
   TextField,
   Tooltip,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useCallback } from "react";
 import {
@@ -24,6 +22,7 @@ import {
   FieldErrors,
   useFieldArray,
 } from "react-hook-form";
+import LanguageSelector from "./reusable-inputs/LanguageSelector";
 
 export default function FormSubjectsKeywordsComponent({
   control,
@@ -151,45 +150,9 @@ export default function FormSubjectsKeywordsComponent({
                                 />
                               </Grid>
                               <Grid item xs={12} sm={6} md={3}>
-                                <Controller
+                                <LanguageSelector
                                   name={`subject.${subjectsArrayIndex}.keyword.${subjectKeywordIndex}.language.id`}
                                   control={control}
-                                  defaultValue=""
-                                  rules={{ required: true }}
-                                  render={({
-                                    field: { onChange, value },
-                                    fieldState: { error },
-                                  }) => (
-                                    <Autocomplete
-                                      options={language}
-                                      getOptionLabel={(option) =>
-                                        `${option.id}: ${option.name}`
-                                      }
-                                      value={
-                                        language.find(
-                                          (lang) =>
-                                            lang.id.toString() ===
-                                            value?.toString()
-                                        ) || null
-                                      }
-                                      onChange={(_, newValue) => {
-                                        onChange(newValue ? newValue.id : "");
-                                      }}
-                                      isOptionEqualToValue={(option, value) => {
-                                        return option.id === value.id;
-                                      }}
-                                      renderInput={(params) => (
-                                        <TextField
-                                          {...params}
-                                          size="small"
-                                          label="Language"
-                                          required
-                                          error={!!error}
-                                          helperText={error?.message}
-                                        />
-                                      )}
-                                    />
-                                  )}
                                 />
                               </Grid>
                             </Grid>

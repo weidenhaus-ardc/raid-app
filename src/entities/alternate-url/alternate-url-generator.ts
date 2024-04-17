@@ -1,4 +1,4 @@
-import { AlternateUrl } from "@/Generated/Raidv2";
+import { AlternateUrl } from "@/generated/raid";
 
 export const alternateUrlGenerator = (): AlternateUrl => {
   return {

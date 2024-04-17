@@ -1,4 +1,4 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import contributorRole from "@/references/contributor_role.json";
 import contributorRoleSchema from "@/references/contributor_role_schema.json";
 import {
@@ -19,7 +19,6 @@ import {
 } from "@mui/material";
 import { Control, Controller, useFieldArray } from "react-hook-form";
 
-import { extractLastUrlSegment } from "@/utils";
 import { useCallback } from "react";
 
 export default function FormContributorsRolesComponent({
@@ -117,7 +116,7 @@ export default function FormContributorsRolesComponent({
                               >
                                 {contributorRole.map((role) => (
                                   <MenuItem key={role.uri} value={role.uri}>
-                                    {extractLastUrlSegment(role.uri)}
+                                    {role.uri}
                                   </MenuItem>
                                 ))}
                               </TextField>

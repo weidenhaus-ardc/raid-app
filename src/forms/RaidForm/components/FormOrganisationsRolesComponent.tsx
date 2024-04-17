@@ -1,4 +1,4 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import organisationRole from "@/references/organisation_role.json";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
@@ -25,10 +25,10 @@ import {
 } from "react-hook-form";
 
 import organisationRoleSchema from "@/references/organisation_role_schema.json";
-import { extractKeyFromIdUri } from "@/utils";
 
 import { dateHelperTextRequired } from "@/Util/DateUtil";
 import { useCallback } from "react";
+import { organisationRoles } from "@/entities/organisation/organisation-mapping";
 
 export default function FormOrganisationsRolesComponent({
   control,
@@ -72,13 +72,15 @@ export default function FormOrganisationsRolesComponent({
               <CardHeader
                 action={
                   <Tooltip title="Add role (max. 1)" placement="right">
-                    <IconButton
-                      aria-label="Add Role"
-                      onClick={handleAddRole}
-                      disabled={organisationRolesArray.fields.length > 0}
-                    >
-                      <AddCircleOutlineIcon />
-                    </IconButton>
+                    <div>
+                      <IconButton
+                        aria-label="Add Role"
+                        onClick={handleAddRole}
+                        disabled={organisationRolesArray.fields.length > 0}
+                      >
+                        <AddCircleOutlineIcon />
+                      </IconButton>
+                    </div>
                   </Tooltip>
                 }
                 title={
@@ -140,7 +142,11 @@ export default function FormOrganisationsRolesComponent({
                                 >
                                   {organisationRole.map((role) => (
                                     <MenuItem key={role.uri} value={role.uri}>
-                                      {extractKeyFromIdUri(role.uri)}
+                                      {
+                                        organisationRoles[
+                                          role.uri as keyof typeof organisationRoles
+                                        ]
+                                      }
                                     </MenuItem>
                                   ))}
                                 </TextField>

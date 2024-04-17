@@ -1,7 +1,7 @@
+import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import { CurrentUserInterface } from "@/types";
 import { Box, Card, CardContent, CardHeader, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useKeycloak } from "@react-keycloak/web";
 
 export default function CurrentUser({
   currentUser,
@@ -9,7 +9,7 @@ export default function CurrentUser({
   currentUser: CurrentUserInterface;
 }) {
   const { clientId, role } = currentUser;
-  const { keycloak } = useKeycloak();
+  const { keycloak } = useCustomKeycloak();
   return (
     <Card
       data-testid="signed-in-user"

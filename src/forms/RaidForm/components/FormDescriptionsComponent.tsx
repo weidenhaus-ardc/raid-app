@@ -1,10 +1,9 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
 } from "@mui/icons-material";
 import {
-  Autocomplete,
   Box,
   Card,
   CardContent,
@@ -27,9 +26,11 @@ import {
 
 import { descriptionGenerator } from "@/entities/description/description-generator";
 import descriptionType from "@/references/description_type.json";
-import language from "@/references/language.json";
-import { extractKeyFromIdUri } from "@/utils";
+
 import { useCallback } from "react";
+
+import { descriptionMapping } from "@/entities/description/description-mapping";
+import LanguageSelector from "@/forms/RaidForm/components/reusable-inputs/LanguageSelector";
 
 export default function FormDescriptionsComponent({
   control,
@@ -46,7 +47,7 @@ export default function FormDescriptionsComponent({
   });
 
   const handleAddDescription = useCallback(() => {
-    descriptionsFieldArray.append(descriptionGenerator(descriptionsFieldArray));
+    descriptionsFieldArray.append(descriptionGenerator());
     trigger("description");
   }, [descriptionsFieldArray, trigger]);
 
@@ -172,57 +173,19 @@ export default function FormDescriptionsComponent({
                                       key={descriptionType.uri}
                                       value={descriptionType.uri}
                                     >
-                                      {extractKeyFromIdUri(descriptionType.uri)}
+                                      {
+                                        descriptionMapping.descriptionType[
+                                          descriptionType.uri as keyof typeof descriptionMapping.descriptionType
+                                        ]
+                                      }
                                     </MenuItem>
                                   ))}
                                 </TextField>
                               </Grid>
                               <Grid item xs={12} sm={6} md={4}>
-                                <Controller
+                                <LanguageSelector
                                   name={`description.${index}.language.id`}
                                   control={control}
-                                  defaultValue=""
-                                  rules={{ required: true }}
-                                  render={({ field: { onChange, value } }) => (
-                                    <Autocomplete
-                                      options={language}
-                                      getOptionLabel={(option) =>
-                                        `${option.id}: ${option.name}`
-                                      }
-                                      value={
-                                        language.find(
-                                          (lang) =>
-                                            lang.id.toString() ===
-                                            value?.toString()
-                                        ) || null
-                                      }
-                                      onChange={(_, newValue) => {
-                                        onChange(newValue ? newValue.id : "");
-                                      }}
-                                      isOptionEqualToValue={(option, value) => {
-                                        return option.id === value.id;
-                                      }}
-                                      renderInput={(params) => (
-                                        <TextField
-                                          {...params}
-                                          size="small"
-                                          label="Description Language"
-                                          required
-                                          error={
-                                            !!errors?.description?.[index]
-                                              ?.language
-                                          }
-                                          helperText={
-                                            errors?.description?.[index]
-                                              ?.language?.id
-                                              ? errors?.description?.[index]
-                                                  ?.language?.id?.message
-                                              : null
-                                          }
-                                        />
-                                      )}
-                                    />
-                                  )}
                                 />
                               </Grid>
                             </Grid>

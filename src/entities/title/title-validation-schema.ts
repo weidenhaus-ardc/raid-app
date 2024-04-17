@@ -1,15 +1,17 @@
 import titleType from "@/references/title_type.json";
 import { combinedPattern } from "@/Util/DateUtil";
 import { z } from "zod";
+import titleTypeSchema from "@/references/title_type_schema.json";
+import languageSchema from "@/references/language_schema.json";
 
 const titleTypeValidationSchema = z.object({
   id: z.enum(titleType.map((type) => type.uri) as [string, ...string[]]),
-  schemaUri: z.literal("https://vocabulary.raid.org/title.type.schema/376"),
+  schemaUri: z.literal(titleTypeSchema[0].uri),
 });
 
 const titleLanguageValidationSchema = z.object({
   id: z.string().min(1),
-  schemaUri: z.literal("https://www.iso.org/standard/74575.html"),
+  schemaUri: z.literal(languageSchema[0].uri),
 });
 
 export const titleValidationSchema = z

@@ -1,6 +1,6 @@
-import { RaidDto } from "@/Generated/Raidv2";
 import AnchorButtons from "@/components/AnchorButtons";
 import BreadcrumbsBar from "@/components/BreadcrumbsBar";
+import { RaidDto } from "@/generated/raid";
 import ShowAccessComponent from "@/pages/ShowRaidPage/components/ShowAccessComponent";
 import ShowAlternateIdentifierComponent from "@/pages/ShowRaidPage/components/ShowAlternateIdentifierComponent";
 import ShowAlternateUrlComponent from "@/pages/ShowRaidPage/components/ShowAlternateUrlComponent";
@@ -11,14 +11,14 @@ import ShowExternalLinksComponent from "@/pages/ShowRaidPage/components/ShowExte
 import ShowOrganisationComponent from "@/pages/ShowRaidPage/components/ShowOrganisationComponent";
 import ShowRelatedObjectComponent from "@/pages/ShowRaidPage/components/ShowRelatedObjectComponent";
 import ShowRelatedRaidComponent from "@/pages/ShowRaidPage/components/ShowRelatedRaidComponent";
-import ShowSpatialCoverageComponent from "@/pages/ShowRaidPage/components/ShowSpatialCoverageComponent";
-import ShowSubjectComponent from "@/pages/ShowRaidPage/components/ShowSubjectComponent";
+// import ShowSpatialCoverageComponent from "@/pages/ShowRaidPage/components/ShowSpatialCoverageComponent";
+// import ShowSubjectComponent from "@/pages/ShowRaidPage/components/ShowSubjectComponent";
 import ShowTitleComponent from "@/pages/ShowRaidPage/components/ShowTitleComponent";
 import type { Breadcrumb } from "@/types";
 import {
+  DocumentScanner as DocumentScannerIcon,
   HistoryEdu as HistoryEduIcon,
   Home as HomeIcon,
-  Visibility as VisibilityIcon,
 } from "@mui/icons-material";
 import {
   Box,
@@ -55,7 +55,7 @@ export default function ShowRaidPageContent({
     {
       label: `RAiD ${handle} ${versionLabel || ""}`,
       to: `/raids/${handle}`,
-      icon: <VisibilityIcon />,
+      icon: <DocumentScannerIcon />,
     },
   ];
 
@@ -112,17 +112,17 @@ export default function ShowRaidPageContent({
             <ShowAccessComponent access={raidData.access} />
           </Box>
 
-          <Box id="subjects" className="scroll">
+          {/* <Box id="subjects" className="scroll">
             <ShowSubjectComponent subject={raidData.subject} />
-          </Box>
+          </Box> */}
 
           {/* <pre>ToDo: Traditional Knowledge Label</pre> */}
 
-          <Box id="spatial-coverage" className="scroll">
+          {/* <Box id="spatial-coverage" className="scroll">
             <ShowSpatialCoverageComponent
               spatialCoverage={raidData.spatialCoverage}
             />
-          </Box>
+          </Box> */}
 
           <Box id="external-links" className="scroll">
             <ShowExternalLinksComponent prefix={prefix} suffix={suffix} />

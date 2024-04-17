@@ -1,9 +1,6 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import accessType from "@/references/access_type.json";
-import language from "@/references/language.json";
-import { extractKeyFromIdUri } from "@/utils";
 import {
-  Autocomplete,
   Box,
   Card,
   CardContent,
@@ -11,11 +8,12 @@ import {
   Grid,
   MenuItem,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { Control, Controller, FieldErrors } from "react-hook-form";
+import LanguageSelector from "./reusable-inputs/LanguageSelector";
 
 export default function FormAccessComponent({
   control,
@@ -78,43 +76,9 @@ export default function FormAccessComponent({
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <Controller
+                <LanguageSelector
                   name="access.statement.language.id"
                   control={control}
-                  defaultValue=""
-                  rules={{ required: true }}
-                  render={({ field: { onChange, value } }) => (
-                    <Autocomplete
-                      options={language}
-                      getOptionLabel={(option) =>
-                        `${option.id}: ${option.name}`
-                      }
-                      value={
-                        language.find(
-                          (lang) => lang.id.toString() === value?.toString()
-                        ) || null
-                      }
-                      onChange={(_, newValue) => {
-                        onChange(newValue ? newValue.id : "");
-                      }}
-                      isOptionEqualToValue={(option, value) => {
-                        return option.id === value.id;
-                      }}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          size="small"
-                          label="Access Statement Language"
-                          error={!!errors?.access?.statement?.language?.id}
-                          helperText={
-                            errors?.access?.statement?.language?.id
-                              ? errors?.access?.statement?.language?.id?.message
-                              : null
-                          }
-                        />
-                      )}
-                    />
-                  )}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={2}>
@@ -133,7 +97,7 @@ export default function FormAccessComponent({
                     >
                       {accessType.map((accessType) => (
                         <MenuItem key={accessType.uri} value={accessType.uri}>
-                          {extractKeyFromIdUri(accessType.uri)}
+                          {accessType.uri}
                         </MenuItem>
                       ))}
                     </TextField>

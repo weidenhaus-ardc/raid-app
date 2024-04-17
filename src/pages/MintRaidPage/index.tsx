@@ -1,7 +1,7 @@
 import RaidForm from "@/forms/RaidForm";
 import { Container } from "@mui/material";
 
-import { RaidApi, RaidDto } from "@/Generated/Raidv2";
+import { RaidApi, RaidDto } from "@/generated/raid";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import { newRaid, raidRequest } from "@/utils";
 import { useMutation } from "@tanstack/react-query";

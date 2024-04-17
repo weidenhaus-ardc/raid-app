@@ -1,4 +1,4 @@
-import { RelatedRaid } from "@/Generated/Raidv2";
+import { RelatedRaid } from "@/generated/raid";
 import { extractKeyFromIdUri } from "@/utils";
 import {
   Box,

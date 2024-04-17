@@ -1,4 +1,4 @@
-import { RaidApi } from "@/Generated/Raidv2";
+import { RaidApi } from "@/generated/raid";
 import { RaidApiContext } from "./context";
 
 export const RaidApiProvider: React.FC<React.PropsWithChildren<unknown>> = ({

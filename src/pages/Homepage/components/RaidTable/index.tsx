@@ -1,4 +1,4 @@
-import { FindAllRaidsRequest, RaidDto } from "@/Generated/Raidv2";
+import { FindAllRaidsRequest, RaidDto } from "@/generated/raid";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";

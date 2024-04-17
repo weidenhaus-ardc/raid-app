@@ -1,4 +1,4 @@
-import { SpatialCoverage } from "@/Generated/Raidv2";
+import { SpatialCoverage } from "@/generated/raid";
 import {
   Box,
   Card,
@@ -40,7 +40,7 @@ export default function ShowSpatialCoverageComponent({
                       <Box>
                         <Typography variant="body2">Place</Typography>
                         <Typography color="text.secondary" variant="body1">
-                          {/*{item.place}*/}
+                          {JSON.stringify(item.place)}
                         </Typography>
                       </Box>
                     </Grid>

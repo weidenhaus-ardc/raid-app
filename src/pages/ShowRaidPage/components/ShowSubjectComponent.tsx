@@ -1,6 +1,5 @@
-import { Subject } from "@/Generated/Raidv2";
+import { Subject } from "@/generated/raid";
 import language from "@/references/language.json";
-import subjectType from "@/references/subject_type.json";
 import {
   Box,
   Card,
@@ -36,8 +35,6 @@ export default function ShowSubjectComponent({
             )}
           </Box>
           {subject?.map((subject, index) => {
-            const subjectTitle = subjectType.find((el) => el.id === subject.id);
-
             return (
               <Stack spacing={2} key={index}>
                 <Box className="raid-card-well">
@@ -46,7 +43,7 @@ export default function ShowSubjectComponent({
                       <Box>
                         <Typography variant="body2">Subject</Typography>
                         <Typography color="text.secondary" variant="body1">
-                          {subjectTitle?.name}
+                          {subject.id}
                         </Typography>
                       </Box>
                     </Grid>

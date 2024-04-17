@@ -1,7 +1,7 @@
-import { type Title } from "@/Generated/Raidv2";
+import { titleMapping } from "@/entities/title/title-mapping";
+import { type Title } from "@/generated/raid";
 import language from "@/references/language.json";
 import { dateDisplayFormatter } from "@/Util/DateUtil";
-import { extractKeyFromIdUri } from "@/utils";
 import {
   Box,
   Card,
@@ -36,7 +36,7 @@ export default function ShowTitleComponent({
           {titles?.map((title, index) => {
             const lang = language.find(
               (language) =>
-                language.id.toString() === title?.language?.id?.toString()
+                language.code.toString() === title?.language?.id?.toString()
             );
 
             return (
@@ -55,7 +55,12 @@ export default function ShowTitleComponent({
                       <Box>
                         <Typography variant="body2">Type</Typography>
                         <Typography color="text.secondary" variant="body1">
-                          {extractKeyFromIdUri(title.type.id)}
+                          {
+                            titleMapping.titleType[
+                              title.type
+                                .id as keyof typeof titleMapping.titleType
+                            ]
+                          }
                         </Typography>
                       </Box>
                     </Grid>

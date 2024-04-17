@@ -1,5 +1,5 @@
-import { RaidDto } from "@/Generated/Raidv2";
-import { FindAllRaidsRequest } from "@/Generated/Raidv2/apis/RaidApi";
+import { RaidDto } from "@/generated/raid";
+import { FindAllRaidsRequest } from "@/generated/raid/apis/RaidApi";
 import SingletonRaidApi from "@/SingletonRaidApi";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
 import { relatedRaidGenerator } from "@/entities/related-raid/related-raid-generator";

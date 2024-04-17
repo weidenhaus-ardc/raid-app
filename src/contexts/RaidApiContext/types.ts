@@ -1,4 +1,4 @@
-import { RaidApi } from "@/Generated/Raidv2";
+import { RaidApi } from "@/generated/raid";
 
 export type RaidApiContextType = {
   api: RaidApi;

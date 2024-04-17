@@ -2,7 +2,7 @@ import {
   RelatedObject,
   RelatedObjectCategory,
   RelatedObjectType,
-} from "@/Generated/Raidv2";
+} from "@/generated/raid";
 import relatedObjectCategories from "@/references/related_object_category.json";
 import relatedObjectCategoriesSchema from "@/references/related_object_category_schema.json";
 import relatedObjectTypes from "@/references/related_object_type.json";

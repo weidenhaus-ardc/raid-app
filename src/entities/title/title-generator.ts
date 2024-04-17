@@ -1,28 +1,34 @@
-import { Language, Title, TitleType } from "@/Generated/Raidv2";
+import { Language, Title, TitleType } from "@/generated/raid";
 import dayjs from "dayjs";
+import titleTypeSchema from "@/references/title_type_schema.json";
+import languageSchema from "@/references/language_schema.json";
+
+const primaryTitle = "https://vocabulary.raid.org/title.type.schema/5";
 
 const titleTypeGenerator = (): TitleType => {
   return {
-    id: "https://vocabulary.raid.org/title.type.schema/5",
-    schemaUri: "https://vocabulary.raid.org/title.type.schema/376",
+    id: primaryTitle,
+    schemaUri: titleTypeSchema[0].uri,
   };
 };
 
 const titleLanguageGenerator = (): Language => {
   return {
     id: "eng",
-    schemaUri: "https://www.iso.org/standard/74575.html",
+    schemaUri: languageSchema[0].uri,
   };
 };
 
-export const titleGenerator = (): Title => {
-  const todaysDate = dayjs(new Date()).format("YYYY-MM-DD");
+const todaysDateStringGenerator = (): string => {
+  return dayjs(new Date()).format("YYYY-MM-DD");
+};
 
+export const titleGenerator = (): Title => {
   return {
     text: `Example title... ${new Date().toLocaleTimeString()}`,
     type: titleTypeGenerator(),
     language: titleLanguageGenerator(),
-    startDate: todaysDate,
+    startDate: todaysDateStringGenerator(),
     endDate: undefined,
   };
 };

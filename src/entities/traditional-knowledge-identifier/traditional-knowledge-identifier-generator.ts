@@ -1,4 +1,4 @@
-import { TraditionalKnowledgeLabel } from "@/Generated/Raidv2";
+import { TraditionalKnowledgeLabel } from "@/generated/raid";
 export const traditionalKonwledgeIdentifierGenerator =
   (): TraditionalKnowledgeLabel => {
     return {

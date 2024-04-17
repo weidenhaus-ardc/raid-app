@@ -1,7 +1,7 @@
 import { AustraliaIcon, OrcidIcon } from "@/components/Icon";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import {
-  AccountBox as AccountIcon,
+  Code as CodeIcon,
   Google as GoogleIcon,
   HelpOutline as HelpOutlineIcon,
 } from "@mui/icons-material";
@@ -144,6 +144,7 @@ export default function LoginPage() {
               </Button>
               <Button
                 startIcon={<AustraliaIcon />}
+                disabled
                 variant="contained"
                 onClick={() =>
                   keycloak.login({
@@ -156,6 +157,7 @@ export default function LoginPage() {
               </Button>
               <Button
                 startIcon={<AustraliaIcon />}
+                disabled
                 variant="contained"
                 onClick={() =>
                   keycloak.login({
@@ -168,6 +170,7 @@ export default function LoginPage() {
               </Button>
               <Button
                 startIcon={<OrcidIcon />}
+                disabled
                 variant="contained"
                 onClick={() =>
                   keycloak.login({
@@ -179,8 +182,9 @@ export default function LoginPage() {
                 ORCID
               </Button>
               <Button
+                sx={{ position: "fixed", bottom: 0, right: 0, opacity: 0.25 }}
                 data-testid="login-button"
-                startIcon={<AccountIcon />}
+                startIcon={<CodeIcon />}
                 variant="contained"
                 onClick={() =>
                   keycloak.login({
@@ -188,7 +192,7 @@ export default function LoginPage() {
                   })
                 }
               >
-                Username
+                DEV
               </Button>
             </Stack>
           </CardContent>

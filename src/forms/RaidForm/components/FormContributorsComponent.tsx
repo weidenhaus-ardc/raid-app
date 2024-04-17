@@ -1,9 +1,10 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
 } from "@mui/icons-material";
 import {
+  Alert,
   Box,
   Card,
   CardContent,
@@ -67,6 +68,9 @@ function ContributorRootField({
         return (
           <>
             <Card variant="outlined" sx={{ bgcolor: "transparent" }}>
+              {errors?.contributor?.message && (
+                <Alert severity="error">{errors?.contributor?.message}</Alert>
+              )}
               <CardHeader
                 title={<Typography variant="h6">{contributorTitle}</Typography>}
                 action={

@@ -1,27 +1,25 @@
 import AnchorButtons from "@/components/AnchorButtons";
-
-import { RaidCreateRequest, RaidDto } from "@/Generated/Raidv2";
+import { ValidationFormSchema } from "@/entities/validation-schema";
+import { RaidCreateRequest, RaidDto } from "@/generated/raid";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Close as CloseIcon, Save as SaveIcon } from "@mui/icons-material";
 import { Box, Fab, Stack, Tooltip } from "@mui/material";
-import { FormProvider, useForm } from "react-hook-form";
-
-import FormDatesComponent from "./components/FormDatesComponent";
-
-import FormSpatialCoveragesComponent from "./components/FormSpatialCoveragesComponent";
-
-import { ValidationFormSchema } from "@/entities/validation-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import FormAccessComponent from "./components/FormAccessComponent";
 import FormAlternateIdentifiersComponent from "./components/FormAlternateIdentifiersComponent";
 import FormAlternateUrlsComponent from "./components/FormAlternateUrlsComponent";
 import FormContributorsComponent from "./components/FormContributorsComponent";
+import FormDatesComponent from "./components/FormDatesComponent";
 import FormDescriptionsComponent from "./components/FormDescriptionsComponent";
 import FormOrganisationsComponent from "./components/FormOrganisationsComponent";
 import FormRelatedObjectsComponent from "./components/FormRelatedObjectsComponent";
 import FormRelatedRaidsComponent from "./components/FormRelatedRaidsComponent";
-import FormSubjectsComponent from "./components/FormSubjectsComponent";
 import FormTitlesComponent from "./components/FormTitlesComponent";
+
+// import FormSubjectsComponent from "./components/FormSubjectsComponent";
+// import FormSpatialCoveragesComponent from "./components/FormSpatialCoveragesComponent";
 
 const formFields = [
   {
@@ -64,14 +62,14 @@ const formFields = [
     id: "access",
     component: FormAccessComponent,
   },
-  {
-    id: "subjects",
-    component: FormSubjectsComponent,
-  },
-  {
-    id: "spatial-coverage",
-    component: FormSpatialCoveragesComponent,
-  },
+  // {
+  //   id: "subjects",
+  //   component: FormSubjectsComponent,
+  // },
+  // {
+  //   id: "spatial-coverage",
+  //   component: FormSpatialCoveragesComponent,
+  // },
 ];
 
 type FormProps = {
@@ -120,35 +118,33 @@ export default function RaidForm({
         >
           <Tooltip title="Cancel" placement="left">
             <Fab
+              component={Link}
               color="primary"
               size="small"
               sx={{ position: "fixed", bottom: "72px", right: "16px" }}
-              component="button"
-              href={
-                raidData?.identifier?.id
-                  ? `/show-raid/${prefix}/${suffix}`
-                  : "/"
-              }
+              to={raidData?.identifier?.id ? `/raids/${prefix}/${suffix}` : "/"}
             >
               <CloseIcon />
             </Fab>
           </Tooltip>
           <Tooltip title="Save changes" placement="left">
-            <Fab
-              variant="extended"
-              color="primary"
-              sx={{ position: "fixed", bottom: "16px", right: "16px" }}
-              component="button"
-              type="submit"
-              disabled={
-                isSubmitting ||
-                Object.keys(formMethods.formState.errors).length > 0
-              }
-              data-testid="save-raid-button"
-            >
-              <SaveIcon sx={{ mr: 1 }} />
-              {isSubmitting ? "Saving..." : "Save"}
-            </Fab>
+            <div>
+              <Fab
+                variant="extended"
+                color="primary"
+                sx={{ position: "fixed", bottom: "16px", right: "16px" }}
+                component="button"
+                type="submit"
+                disabled={
+                  isSubmitting ||
+                  Object.keys(formMethods.formState.errors).length > 0
+                }
+                data-testid="save-raid-button"
+              >
+                <SaveIcon sx={{ mr: 1 }} />
+                {isSubmitting ? "Saving..." : "Save"}
+              </Fab>
+            </div>
           </Tooltip>
 
           <Stack spacing={2} data-testid="raid-form">

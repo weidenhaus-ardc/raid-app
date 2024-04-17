@@ -1,4 +1,4 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import { dateHelperText, dateHelperTextRequired } from "@/Util/DateUtil";
 import {
   Box,

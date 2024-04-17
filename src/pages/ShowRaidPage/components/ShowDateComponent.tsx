@@ -1,4 +1,4 @@
-import { ModelDate } from "@/Generated/Raidv2";
+import { ModelDate } from "@/generated/raid";
 import { dateDisplayFormatter } from "@/Util/DateUtil";
 import {
   Box,

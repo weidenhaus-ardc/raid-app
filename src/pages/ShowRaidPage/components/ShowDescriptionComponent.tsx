@@ -1,6 +1,6 @@
-import { Description } from "@/Generated/Raidv2";
+import { descriptionMapping } from "@/entities/description/description-mapping";
+import { Description } from "@/generated/raid";
 import language from "@/references/language.json";
-import { extractKeyFromIdUri } from "@/utils";
 import {
   Box,
   Card,
@@ -35,7 +35,8 @@ export default function ShowDescriptionComponent({
           {description?.map((description, index) => {
             const lang = language.find(
               (language) =>
-                language.id.toString() === description?.language?.id?.toString()
+                language.code.toString() ===
+                description?.language?.id?.toString()
             );
             return (
               <Stack spacing={2} key={index}>
@@ -57,7 +58,12 @@ export default function ShowDescriptionComponent({
                           Description Type
                         </Typography>
                         <Typography color="text.secondary" variant="body1">
-                          {extractKeyFromIdUri(description.type.id)}
+                          {
+                            descriptionMapping.descriptionType[
+                              description.type
+                                .id as keyof typeof descriptionMapping.descriptionType
+                            ]
+                          }
                         </Typography>
                       </Box>
                     </Grid>

@@ -1,15 +1,5 @@
 [
   {
-    "id": 2,
-    "uri": "https://www.geonames.org/",
-    "status": null
-  },
-  {
-    "id": 1,
-    "uri": "https://www.openstreetmap.org/",
-    "status": "inactive"
-  },
-  {
     "id": 3,
     "uri": "https://nominatim.openstreetmap.org/",
     "status": "active"

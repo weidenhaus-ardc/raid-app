@@ -50,6 +50,12 @@ export interface ServicePointCreateRequest {
      */
     repositoryId?: string;
     /**
+     * The Keycloak group id (UUID) associated with the service point.
+     * @type {string}
+     * @memberof ServicePointCreateRequest
+     */
+    groupId: string;
+    /**
      * The prefix used in the handle when minting RAiDs. Assigned when the repository is created.
      * @type {string}
      * @memberof ServicePointCreateRequest
@@ -82,6 +88,7 @@ export function instanceOfServicePointCreateRequest(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "name" in value;
     isInstance = isInstance && "identifierOwner" in value;
+    isInstance = isInstance && "groupId" in value;
 
     return isInstance;
 }
@@ -101,6 +108,7 @@ export function ServicePointCreateRequestFromJSONTyped(json: any, ignoreDiscrimi
         'techEmail': !exists(json, 'techEmail') ? undefined : json['techEmail'],
         'identifierOwner': json['identifierOwner'],
         'repositoryId': !exists(json, 'repositoryId') ? undefined : json['repositoryId'],
+        'groupId': json['groupId'],
         'prefix': !exists(json, 'prefix') ? undefined : json['prefix'],
         'password': !exists(json, 'password') ? undefined : json['password'],
         'appWritesEnabled': !exists(json, 'appWritesEnabled') ? undefined : json['appWritesEnabled'],
@@ -122,6 +130,7 @@ export function ServicePointCreateRequestToJSON(value?: ServicePointCreateReques
         'techEmail': value.techEmail,
         'identifierOwner': value.identifierOwner,
         'repositoryId': value.repositoryId,
+        'groupId': value.groupId,
         'prefix': value.prefix,
         'password': value.password,
         'appWritesEnabled': value.appWritesEnabled,

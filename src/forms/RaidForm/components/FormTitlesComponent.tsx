@@ -1,14 +1,12 @@
-import { RaidDto } from "@/Generated/Raidv2";
 import { dateHelperText, dateHelperTextRequired } from "@/Util/DateUtil";
 import { titleGenerator } from "@/entities/title/title-generator";
-import language from "@/references/language.json";
+import { RaidDto } from "@/generated/raid";
 import titleType from "@/references/title_type.json";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
 } from "@mui/icons-material";
 import {
-  Autocomplete,
   Box,
   Card,
   CardContent,
@@ -29,6 +27,8 @@ import {
   UseFormTrigger,
   useFieldArray,
 } from "react-hook-form";
+import LanguageSelector from "@/forms/RaidForm/components/reusable-inputs/LanguageSelector";
+import { titleMapping } from "@/entities/title/title-mapping";
 
 export default function FormTitlesComponent({
   control,
@@ -160,51 +160,19 @@ export default function FormTitlesComponent({
                                     key={titleType.uri}
                                     value={titleType.uri}
                                   >
-                                    {titleType.uri}
+                                    {
+                                      titleMapping.titleType[
+                                        titleType.uri as keyof typeof titleMapping.titleType
+                                      ]
+                                    }
                                   </MenuItem>
                                 ))}
                               </TextField>
                             </Grid>
                             <Grid item xs={12} sm={6} md={3}>
-                              <Controller
+                              <LanguageSelector
                                 name={`title.${index}.language.id`}
                                 control={control}
-                                defaultValue=""
-                                rules={{ required: true }}
-                                render={({
-                                  field: { onChange, value },
-                                  fieldState: { error },
-                                }) => (
-                                  <Autocomplete
-                                    options={language}
-                                    getOptionLabel={(option) =>
-                                      `${option.code}: ${option.name}`
-                                    }
-                                    value={
-                                      language.find(
-                                        (lang) =>
-                                          lang.code.toString() ===
-                                          value?.toString()
-                                      ) || null
-                                    }
-                                    onChange={(_, newValue) => {
-                                      onChange(newValue ? newValue.id : "");
-                                    }}
-                                    isOptionEqualToValue={(option, value) => {
-                                      return option.code === value.code;
-                                    }}
-                                    renderInput={(params) => (
-                                      <TextField
-                                        {...params}
-                                        size="small"
-                                        label="Language"
-                                        required
-                                        error={!!error}
-                                        helperText={error?.message}
-                                      />
-                                    )}
-                                  />
-                                )}
                               />
                             </Grid>
                             <Grid item xs={12} sm={6} md={6}>

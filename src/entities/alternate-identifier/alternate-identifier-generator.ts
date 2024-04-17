@@ -1,4 +1,4 @@
-import { AlternateIdentifier } from "@/Generated/Raidv2";
+import { AlternateIdentifier } from "@/generated/raid";
 
 export const alternateIdentifierGenerator = (): AlternateIdentifier => {
   return {

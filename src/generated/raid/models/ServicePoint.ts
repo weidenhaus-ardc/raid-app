@@ -14,7 +14,7 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * data that any member of service-point and operators can see
+ * The response for all service point requests
  * @export
  * @interface ServicePoint
  */
@@ -49,6 +49,12 @@ export interface ServicePoint {
      * @memberof ServicePoint
      */
     prefix?: string;
+    /**
+     * The Keycloak group id (UUID) associated with the service point.
+     * @type {string}
+     * @memberof ServicePoint
+     */
+    groupId?: string;
     /**
      * 
      * @type {string}
@@ -111,6 +117,7 @@ export function ServicePointFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'identifierOwner': json['identifierOwner'],
         'repositoryId': !exists(json, 'repositoryId') ? undefined : json['repositoryId'],
         'prefix': !exists(json, 'prefix') ? undefined : json['prefix'],
+        'groupId': !exists(json, 'groupId') ? undefined : json['groupId'],
         'searchContent': !exists(json, 'searchContent') ? undefined : json['searchContent'],
         'techEmail': json['techEmail'],
         'adminEmail': json['adminEmail'],
@@ -133,6 +140,7 @@ export function ServicePointToJSON(value?: ServicePoint | null): any {
         'identifierOwner': value.identifierOwner,
         'repositoryId': value.repositoryId,
         'prefix': value.prefix,
+        'groupId': value.groupId,
         'searchContent': value.searchContent,
         'techEmail': value.techEmail,
         'adminEmail': value.adminEmail,

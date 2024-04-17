@@ -1,7 +1,6 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import contributorPosition from "@/references/contributor_position.json";
 import contributorPositionSchema from "@/references/contributor_position_schema.json";
-import { extractKeyFromIdUri } from "@/utils";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
@@ -28,6 +27,7 @@ import {
 
 import { dateHelperTextRequired } from "@/Util/DateUtil";
 import { useCallback } from "react";
+import { contributorMapping } from "@/entities/contributor/contributor-mapping";
 
 export default function FormContributorsPositionsComponent({
   control,
@@ -137,20 +137,18 @@ export default function FormContributorsPositionsComponent({
                                     ]);
                                   }}
                                 >
-                                  {contributorPosition
-                                    .filter(
-                                      (el) =>
-                                        !el.uri.includes("leader.json") &&
-                                        !el.uri.includes("contact-person.json")
-                                    )
-                                    .map((position) => (
-                                      <MenuItem
-                                        key={position.uri}
-                                        value={position.uri}
-                                      >
-                                        {extractKeyFromIdUri(position.uri)}
-                                      </MenuItem>
-                                    ))}
+                                  {contributorPosition.map((position) => (
+                                    <MenuItem
+                                      key={position.uri}
+                                      value={position.uri}
+                                    >
+                                      {
+                                        contributorMapping.contributorPosition[
+                                          position.uri as keyof typeof contributorMapping.contributorPosition
+                                        ]
+                                      }
+                                    </MenuItem>
+                                  ))}
                                 </TextField>
                               </Grid>
 

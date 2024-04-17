@@ -1,4 +1,4 @@
-import { RaidDto } from "@/Generated/Raidv2";
+import { RaidDto } from "@/generated/raid";
 import { alternateUrlGenerator } from "@/entities/alternate-url/alternate-url-generator";
 import {
   AddCircleOutline as AddCircleOutlineIcon,

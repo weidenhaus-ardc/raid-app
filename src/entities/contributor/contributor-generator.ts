@@ -1,19 +1,20 @@
 import contributorRole from "@/references/contributor_role.json";
 import contributorRoleSchema from "@/references/contributor_role_schema.json";
+
+import contributorPosition from "@/references/contributor_position.json";
+import contributorPositionSchema from "@/references/contributor_position_schema.json";
 import dayjs from "dayjs";
 
 import {
   Contributor,
   ContributorPosition,
   ContributorRole,
-} from "@/Generated/Raidv2";
+} from "@/generated/raid";
 
 const contributorPositionGenerator = (): ContributorPosition => {
-  
-
   return {
-    schemaUri: "https://vocabulary.raid.org/contributor.position.schema/305",
-    id: "https://vocabulary.raid.org/contributor.position.schema/307",
+    schemaUri: contributorPositionSchema[0].uri,
+    id: contributorPosition[Math.floor(Math.random() * contributorPosition.length)].uri,
     startDate: dayjs().format("YYYY-MM-DD"),
   };
 };

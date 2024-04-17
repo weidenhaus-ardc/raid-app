@@ -1,4 +1,4 @@
-import { RelatedRaid, RelatedRaidType } from "@/Generated/Raidv2";
+import { RelatedRaid, RelatedRaidType } from "@/generated/raid";
 import relatedRaidType from "@/references/related_raid_type.json";
 import relatedRaidTypeSchema from "@/references/related_raid_type_schema.json";
 

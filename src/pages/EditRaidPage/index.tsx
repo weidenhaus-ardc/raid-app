@@ -1,12 +1,13 @@
-import { FindRaidByNameRequest, RaidApi, RaidDto } from "@/Generated/Raidv2";
 import BreadcrumbsBar from "@/components/BreadcrumbsBar";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
 import RaidForm from "@/forms/RaidForm";
+import { FindRaidByNameRequest, RaidApi, RaidDto } from "@/generated/raid";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import LoadingPage from "@/pages/LoadingPage";
 import type { Breadcrumb } from "@/types";
 import { raidRequest } from "@/utils";
 import {
+  DocumentScanner as DocumentScannerIcon,
   Edit as EditIcon,
   HistoryEdu as HistoryEduIcon,
   Home as HomeIcon,
@@ -71,7 +72,7 @@ export default function EditRaidPage() {
   const updateRequest = useMutation({
     mutationFn: handleRaidUpdate,
     onSuccess: () => {
-      navigate(`/show-raid/${prefix}/${suffix}`);
+      navigate(`/raids/${prefix}/${suffix}`);
     },
     onError: (error) => {
       console.log("error", error);
@@ -91,6 +92,11 @@ export default function EditRaidPage() {
     },
     {
       label: `RAiD ${prefix}/${suffix}`,
+      to: `/raids/${prefix}/${suffix}`,
+      icon: <DocumentScannerIcon />,
+    },
+    {
+      label: `Edit`,
       to: `/raids/${prefix}/${suffix}/edit`,
       icon: <EditIcon />,
     },

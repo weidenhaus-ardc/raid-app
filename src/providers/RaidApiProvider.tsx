@@ -1,4 +1,4 @@
-import { RaidApi } from "@/Generated/Raidv2";
+import { RaidApi } from "@/generated/raid";
 import { ReactNode, createContext, useMemo } from "react";
 
 const RaidApiContext = createContext<RaidApi | null>(null);

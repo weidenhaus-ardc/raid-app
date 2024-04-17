@@ -1,16 +1,16 @@
-import type {
-  FindServicePointByIdRequest,
-  ServicePoint,
-} from "@/Generated/Raidv2";
 import SingletonServicePointApi from "@/SingletonServicePointApi";
 import BreadcrumbsBar from "@/components/BreadcrumbsBar";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
+import type {
+  FindServicePointByIdRequest,
+  ServicePoint,
+} from "@/generated/raid";
 
+import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import LoadingPage from "@/pages/LoadingPage";
 import { Breadcrumb } from "@/types";
 import { Home as HomeIcon, Hub as HubIcon } from "@mui/icons-material";
 import { Card, CardContent, CardHeader, Container } from "@mui/material";
-import { useKeycloak } from "@react-keycloak/web";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import ServicePointUpdateForm from "./components/ServicePointUpdateForm";
@@ -19,7 +19,7 @@ import ServicePointUsers from "./components/ServicePointUsers";
 export default function ServicePoint() {
   const servicePointApi = SingletonServicePointApi.getInstance();
 
-  const { initialized, keycloak } = useKeycloak();
+  const { keycloak, initialized } = useCustomKeycloak();
 
   const { servicePointId } = useParams() as { servicePointId: string };
 

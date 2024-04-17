@@ -1,4 +1,4 @@
-import { RaidApi } from "@/Generated/Raidv2";
+import { RaidApi } from "@/generated/raid";
 
 class SingletonRaidApi {
   private static instance: RaidApi | null = null;

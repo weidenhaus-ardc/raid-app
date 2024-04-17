@@ -1,6 +1,6 @@
-import { Organisation } from "@/Generated/Raidv2";
+import { organisationRoles } from "@/entities/organisation/organisation-mapping";
+import { Organisation } from "@/generated/raid";
 import { dateDisplayFormatter } from "@/Util/DateUtil";
-import { extractKeyFromIdUri } from "@/utils";
 import {
   Box,
   Card,
@@ -98,7 +98,11 @@ export default function ShowOrganisationComponent({
                                   >
                                     <TableCell component="th" scope="row">
                                       <Chip
-                                        label={extractKeyFromIdUri(row.id)}
+                                        label={
+                                          organisationRoles[
+                                            row.id as keyof typeof organisationRoles
+                                          ]
+                                        }
                                         size="small"
                                         color="primary"
                                       />

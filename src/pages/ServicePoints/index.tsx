@@ -1,7 +1,8 @@
-import { ServicePoint } from "@/Generated/Raidv2";
 import SingletonServicePointApi from "@/SingletonServicePointApi";
 import BreadcrumbsBar from "@/components/BreadcrumbsBar";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
+import { ServicePoint } from "@/generated/raid";
+import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import LoadingPage from "@/pages/LoadingPage";
 import ServicePointCreateForm from "@/pages/ServicePoint/components/ServicePointCreateForm";
 import { Breadcrumb } from "@/types";
@@ -22,7 +23,6 @@ import {
   Stack,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useKeycloak } from "@react-keycloak/web";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 
@@ -99,7 +99,7 @@ const columns: GridColDef[] = [
 
 export default function ServicePoints() {
   const servicePointApi = SingletonServicePointApi.getInstance();
-  const { initialized, keycloak } = useKeycloak();
+  const { keycloak, initialized } = useCustomKeycloak();
 
   const listServicePoints = async () => {
     return servicePointApi.findAllServicePoints({

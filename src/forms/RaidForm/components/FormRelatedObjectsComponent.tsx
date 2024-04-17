@@ -1,8 +1,11 @@
-import { RaidDto } from "@/Generated/Raidv2";
 import { relatedObjectGenerator } from "@/entities/related-object/related-object-generator";
+import {
+  relatedObjectCategoryMapping,
+  relatedObjectTypeMapping,
+} from "@/entities/related-object/related-object-mapping";
+import { RaidDto } from "@/generated/raid";
 import relatedObjectCategories from "@/references/related_object_category.json";
 import relatedObjectTypes from "@/references/related_object_type.json";
-import { extractKeyFromIdUri } from "@/utils";
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   RemoveCircleOutline as RemoveCircleOutlineIcon,
@@ -136,17 +139,16 @@ export default function FormRelatedObjectsComponent({
                                     key={relatedObjectType.uri}
                                     value={relatedObjectType.uri}
                                   >
-                                    {relatedObjectType.uri}
+                                    {
+                                      relatedObjectTypeMapping[
+                                        relatedObjectType.uri as keyof typeof relatedObjectTypeMapping
+                                      ]
+                                    }
                                   </MenuItem>
                                 ))}
                               </TextField>
                             </Grid>
                             <Grid item xs={12} sm={6} md={3}>
-                              <pre>
-                                {JSON.stringify(
-                                  controllerField?.value?.category?.[0]
-                                )}
-                              </pre>
                               <TextField
                                 select
                                 value={
@@ -192,9 +194,11 @@ export default function FormRelatedObjectsComponent({
                                       key={relatedObjectCategory.uri}
                                       value={relatedObjectCategory.uri}
                                     >
-                                      {extractKeyFromIdUri(
-                                        relatedObjectCategory.uri
-                                      )}
+                                      {
+                                        relatedObjectCategoryMapping[
+                                          relatedObjectCategory.uri as keyof typeof relatedObjectCategoryMapping
+                                        ]
+                                      }
                                     </MenuItem>
                                   )
                                 )}

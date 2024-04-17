@@ -1,41 +1,22 @@
 import {
   Edit as EditIcon,
-  History as HistoryIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
-  Menu as MenuIcon,
 } from "@mui/icons-material";
-import { SpeedDial, SpeedDialAction } from "@mui/material";
-import { useNavigate } from "react-router";
+import { Fab, Tooltip } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function ShowRaidPageSpeedDialMenu({
   handle,
 }: {
   handle: string;
 }) {
-  const navigate = useNavigate();
-
   return (
     <>
-      <SpeedDial
-        ariaLabel="raid speeddial"
-        sx={{ position: "fixed", bottom: 16, right: 16 }}
-        icon={<MenuIcon />}
-        data-testid="raid-speeddial"
-      >
-        <SpeedDialAction
-          icon={<EditIcon />}
-          tooltipTitle="Edit RAiD"
-          onClick={() => navigate(`/raids/${handle}/edit`)}
-          data-testid="edit-raid-button"
-        />
-        <SpeedDialAction
-          icon={<HistoryIcon />}
-          tooltipTitle="Show RAiD History"
-          onClick={() => navigate(`/show-raid-history/${handle}`)}
-        />
-        <SpeedDialAction
-          icon={<KeyboardArrowUpIcon />}
-          tooltipTitle="Scroll to top"
+      <Tooltip title="Scroll to top" placement="left">
+        <Fab
+          color="primary"
+          size="small"
+          sx={{ position: "fixed", bottom: "72px", right: "16px" }}
           onClick={() => {
             document.getElementById("start")?.scrollIntoView({
               behavior: "smooth",
@@ -43,8 +24,22 @@ export default function ShowRaidPageSpeedDialMenu({
               inline: "start",
             });
           }}
-        />
-      </SpeedDial>
+        >
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </Tooltip>
+      <Tooltip title="Edit RAiD" placement="left">
+        <Fab
+          variant="extended"
+          color="primary"
+          sx={{ position: "fixed", bottom: "16px", right: "16px" }}
+          component={Link}
+          to={`/raids/${handle}/edit`}
+        >
+          <EditIcon sx={{ mr: 1 }} />
+          Edit
+        </Fab>
+      </Tooltip>
     </>
   );
 }

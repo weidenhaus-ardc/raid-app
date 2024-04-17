@@ -69,7 +69,7 @@ export interface UpdateRaidRequest {
 export class RaidApi extends runtime.BaseAPI {
 
     /**
-     * list raids
+     * List raids
      */
     async findAllRaidsRaw(requestParameters: FindAllRaidsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<RaidDto>>> {
         const queryParameters: any = {};
@@ -103,7 +103,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
-     * list raids
+     * List raids
      */
     async findAllRaids(requestParameters: FindAllRaidsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RaidDto>> {
         const response = await this.findAllRaidsRaw(requestParameters, initOverrides);
@@ -111,7 +111,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
-     * read a raid, caller must be authorized
+     * Read a raid
      */
     async findRaidByNameRaw(requestParameters: FindRaidByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RaidDto>> {
         if (requestParameters.prefix === null || requestParameters.prefix === undefined) {
@@ -149,7 +149,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
-     * read a raid, caller must be authorized
+     * Read a raid
      */
     async findRaidByName(requestParameters: FindRaidByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RaidDto> {
         const response = await this.findRaidByNameRaw(requestParameters, initOverrides);
@@ -157,7 +157,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
-     * mint a raid
+     * Mint a raid
      */
     async mintRaidRaw(requestParameters: MintRaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RaidDto>> {
         if (requestParameters.raidCreateRequest === null || requestParameters.raidCreateRequest === undefined) {
@@ -190,7 +190,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
-     * mint a raid
+     * Mint a raid
      */
     async mintRaid(requestParameters: MintRaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RaidDto> {
         const response = await this.mintRaidRaw(requestParameters, initOverrides);
@@ -198,7 +198,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
-     * A list of the changes to the raid
+     * A list of base64 encoded changes to the raid in JSON Patch (RFC 6902) format.
      */
     async raidHistoryRaw(requestParameters: RaidHistoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<RaidChange>>> {
         if (requestParameters.prefix === null || requestParameters.prefix === undefined) {
@@ -232,7 +232,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
-     * A list of the changes to the raid
+     * A list of base64 encoded changes to the raid in JSON Patch (RFC 6902) format.
      */
     async raidHistory(requestParameters: RaidHistoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RaidChange>> {
         const response = await this.raidHistoryRaw(requestParameters, initOverrides);
@@ -240,6 +240,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
+     * Update a raid
      */
     async updateRaidRaw(requestParameters: UpdateRaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RaidDto>> {
         if (requestParameters.prefix === null || requestParameters.prefix === undefined) {
@@ -280,6 +281,7 @@ export class RaidApi extends runtime.BaseAPI {
     }
 
     /**
+     * Update a raid
      */
     async updateRaid(requestParameters: UpdateRaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RaidDto> {
         const response = await this.updateRaidRaw(requestParameters, initOverrides);

@@ -1,7 +1,6 @@
-import type {
-  ServicePoint,
-  UpdateServicePointRequest,
-} from "@/Generated/Raidv2";
+import type { ServicePoint, UpdateServicePointRequest } from "@/generated/raid";
+import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
+import SingletonServicePointApi from "@/SingletonServicePointApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -23,10 +22,16 @@ export default function ServicePointUpdateForm({
   servicePoint: ServicePoint;
 }) {
   const queryClient = useQueryClient();
+  const api = SingletonServicePointApi.getInstance();
+  const { keycloak } = useCustomKeycloak();
 
   const initalServicePointValues: UpdateServicePointRequest = {
     id: servicePoint.id,
-    servicePointUpdateRequest: { ...servicePoint, password: "" },
+    servicePointUpdateRequest: {
+      ...servicePoint,
+      groupId: servicePoint.groupId || "",
+      password: "",
+    },
   };
 
   const updateServicePointRequestValidationSchema = z.object({
@@ -68,9 +73,12 @@ export default function ServicePointUpdateForm({
   const updateServicePoint = async (
     servicePoint: UpdateServicePointRequest
   ) => {
-    // return await api.servicePoint.updateServicePoint(servicePoint);
-    console.log(servicePoint);
-    return () => null;
+    return await api.updateServicePoint(servicePoint, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${keycloak.token}`,
+      },
+    });
   };
 
   const updateServicePointMutation = useMutation({

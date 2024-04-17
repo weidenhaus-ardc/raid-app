@@ -1,6 +1,10 @@
-import { Contributor } from "@/Generated/Raidv2";
+import { contributorMapping } from "@/entities/contributor/contributor-mapping";
+import type {
+  Contributor,
+  ContributorPosition,
+  ContributorRole,
+} from "@/generated/raid";
 import { dateDisplayFormatter } from "@/Util/DateUtil";
-import { extractKeyFromIdUri, extractLastUrlSegment } from "@/utils";
 import {
   Box,
   Card,
@@ -20,6 +24,101 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+
+function ContributorPositionsComponent({
+  contributorPositions,
+}: {
+  contributorPositions: ContributorPosition[];
+}) {
+  return (
+    <>
+      {contributorPositions.length === 0 && (
+        <Typography
+          variant="body2"
+          color={"text.secondary"}
+          textAlign={"center"}
+        >
+          No positions defined
+        </Typography>
+      )}
+
+      {contributorPositions.length > 0 && (
+        <TableContainer
+          component={Paper}
+          variant="outlined"
+          sx={{
+            background: "transparent",
+          }}
+        >
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ width: "50%" }}>Position</TableCell>
+                <TableCell>Start Date</TableCell>
+                <TableCell>End Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {contributorPositions.map((row) => {
+                return (
+                  <TableRow
+                    key={row.id}
+                    sx={{
+                      "&:last-child td, &:last-child th": {
+                        border: 0,
+                      },
+                    }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <Chip
+                        label={
+                          contributorMapping.contributorPosition[
+                            row.id as keyof typeof contributorMapping.contributorPosition
+                          ]
+                        }
+                        size="small"
+                        color="primary"
+                      />
+                    </TableCell>
+                    <TableCell>{dateDisplayFormatter(row.startDate)}</TableCell>
+                    <TableCell>{dateDisplayFormatter(row.endDate)}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </>
+  );
+}
+
+function ContributorRolesComponent({
+  contributorRoles,
+}: {
+  contributorRoles: ContributorRole[];
+}) {
+  return (
+    <>
+      {contributorRoles.length === 0 && (
+        <Typography
+          variant="body2"
+          color={"text.secondary"}
+          textAlign={"center"}
+        >
+          No roles defined
+        </Typography>
+      )}
+      <Grid container spacing={1}>
+        {contributorRoles.map((row, index) => (
+          <Grid item key={index}>
+            <Chip label={row.id} size="small" color="primary" key={index} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
+  );
+}
 
 export default function ShowContributorComponent({
   contributor,
@@ -91,65 +190,9 @@ export default function ShowContributorComponent({
                           Positions
                         </Typography>
 
-                        {contributor.position.length === 0 && (
-                          <Typography
-                            variant="body2"
-                            color={"text.secondary"}
-                            textAlign={"center"}
-                          >
-                            No positions defined
-                          </Typography>
-                        )}
-
-                        {contributor.position.length > 0 && (
-                          <TableContainer
-                            component={Paper}
-                            variant="outlined"
-                            sx={{
-                              background: "transparent",
-                            }}
-                          >
-                            <Table size="small">
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell sx={{ width: "50%" }}>
-                                    Position
-                                  </TableCell>
-                                  <TableCell>Start Date</TableCell>
-                                  <TableCell>End Date</TableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {contributor.position.map((row) => {
-                                  return (
-                                    <TableRow
-                                      key={row.id}
-                                      sx={{
-                                        "&:last-child td, &:last-child th": {
-                                          border: 0,
-                                        },
-                                      }}
-                                    >
-                                      <TableCell component="th" scope="row">
-                                        <Chip
-                                          label={extractKeyFromIdUri(row.id)}
-                                          size="small"
-                                          color="primary"
-                                        />
-                                      </TableCell>
-                                      <TableCell>
-                                        {dateDisplayFormatter(row.startDate)}
-                                      </TableCell>
-                                      <TableCell>
-                                        {dateDisplayFormatter(row.endDate)}
-                                      </TableCell>
-                                    </TableRow>
-                                  );
-                                })}
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        )}
+                        <ContributorPositionsComponent
+                          contributorPositions={contributor.position}
+                        />
                       </Grid>
                     </Box>
                     <Box className="raid-card-well">
@@ -157,27 +200,9 @@ export default function ShowContributorComponent({
                         <Typography variant="body2" gutterBottom>
                           Roles
                         </Typography>
-                        {contributor.role.length === 0 && (
-                          <Typography
-                            variant="body2"
-                            color={"text.secondary"}
-                            textAlign={"center"}
-                          >
-                            No roles defined
-                          </Typography>
-                        )}
-                        <Grid container spacing={1}>
-                          {contributor.role.map((row, index) => (
-                            <Grid item key={index}>
-                              <Chip
-                                label={extractLastUrlSegment(row.id)}
-                                size="small"
-                                color="primary"
-                                key={index}
-                              />
-                            </Grid>
-                          ))}
-                        </Grid>
+                        <ContributorRolesComponent
+                          contributorRoles={contributor.role}
+                        />
                       </Grid>
                     </Box>
                   </Stack>
