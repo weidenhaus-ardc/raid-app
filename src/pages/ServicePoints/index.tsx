@@ -1,7 +1,7 @@
 import SingletonServicePointApi from "@/SingletonServicePointApi";
 import BreadcrumbsBar from "@/components/BreadcrumbsBar";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
-import { ServicePoint } from "@/generated/raid";
+import { FindServicePointByIdRequest, ServicePoint } from "@/generated/raid";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import LoadingPage from "@/pages/LoadingPage";
 import ServicePointCreateForm from "@/pages/ServicePoint/components/ServicePointCreateForm";
@@ -101,17 +101,39 @@ export default function ServicePoints() {
   const servicePointApi = SingletonServicePointApi.getInstance();
   const { keycloak, initialized } = useCustomKeycloak();
 
-  const listServicePoints = async () => {
-    return servicePointApi.findAllServicePoints({
+  const isOperator = keycloak.hasRealmRole("operator");
+  // const isAdmin = keycloak.hasRealmRole("group_admin");
+
+  const fetchAllServicePointsForOperator = async () => {
+    return await servicePointApi.findAllServicePoints({
       headers: {
         Authorization: `Bearer ${keycloak.token}`,
       },
     });
   };
 
+  const fetchOneServicePointForAdmin = async () => {
+    const servicePoints: ServicePoint[] = [];
+    const findServicePointByIdRequest: FindServicePointByIdRequest = {
+      id: keycloak?.tokenParsed?.service_point_group_id,
+    };
+    const data = await servicePointApi.findServicePointById(
+      findServicePointByIdRequest,
+      {
+        headers: {
+          Authorization: `Bearer ${keycloak.token}`,
+        },
+      }
+    );
+    servicePoints.push(data);
+    return servicePoints;
+  };
+
   const query = useQuery<ServicePoint[]>({
     queryKey: ["servicePoints"],
-    queryFn: listServicePoints,
+    queryFn: isOperator
+      ? fetchAllServicePointsForOperator
+      : fetchOneServicePointForAdmin,
     enabled: initialized && keycloak.authenticated,
   });
 

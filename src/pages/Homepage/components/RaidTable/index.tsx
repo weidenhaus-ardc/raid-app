@@ -3,8 +3,6 @@ import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 
-import ErrorAlertComponent from "@/components/ErrorAlertComponent";
-
 import SingletonRaidApi from "@/SingletonRaidApi";
 import LoadingPage from "@/pages/LoadingPage";
 import {
@@ -33,6 +31,7 @@ export default function RaidTable({ title }: { title?: string }) {
     const findAllRaidsRequest: FindAllRaidsRequest = {
       servicePointId: servicePointId,
     };
+
     return raidApi.findAllRaids(findAllRaidsRequest, {
       headers: {
         Authorization: `Bearer ${keycloak.token}`,
@@ -53,7 +52,7 @@ export default function RaidTable({ title }: { title?: string }) {
   const appWritesEnabled = true;
 
   if (raidQuery.isError) {
-    return <ErrorAlertComponent error={raidQuery.error} />;
+    return <Typography variant="h6">No data.</Typography>;
   }
 
   const columns: GridColDef[] = [

@@ -1,15 +1,27 @@
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
-import { CurrentUserInterface } from "@/types";
 import { Box, Card, CardContent, CardHeader, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { KeycloakTokenParsed } from "keycloak-js";
 
-export default function CurrentUser({
-  currentUser,
+function getRoleFromToken({
+  tokenParsed,
 }: {
-  currentUser: CurrentUserInterface;
+  tokenParsed: KeycloakTokenParsed | undefined;
 }) {
-  const { clientId, role } = currentUser;
+  let highestRole = "";
+  if (tokenParsed?.realm_access?.roles.includes("service-point-user")) {
+    highestRole = "service-point-user";
+  }
+  if (tokenParsed?.realm_access?.roles.includes("group-admin")) {
+    highestRole = "group-admin";
+  }
+  return highestRole;
+}
+
+export default function CurrentUser() {
   const { keycloak } = useCustomKeycloak();
+  const role = getRoleFromToken({ tokenParsed: keycloak.tokenParsed });
+  const clientId = keycloak.tokenParsed?.azp;
   return (
     <Card
       data-testid="signed-in-user"

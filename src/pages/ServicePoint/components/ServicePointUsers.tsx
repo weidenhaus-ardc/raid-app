@@ -55,7 +55,7 @@ export default function ServicePointUsers({
         Authorization: `Bearer ${keycloak.token}`,
       },
     });
-    return response.json();
+    return await response.json();
   }
 
   const query = useQuery({
@@ -73,6 +73,8 @@ export default function ServicePointUsers({
       userGroupId: string;
       operation: "grant" | "revoke";
     }) => {
+      console.log("userId", userId);
+      console.log("userGroupId", userGroupId);
       const response = await fetch(`${url}/${operation}`, {
         method: "PUT",
         headers: {
@@ -177,6 +179,7 @@ export default function ServicePointUsers({
                               "service-point-user"
                             )}
                             onClick={() => {
+                              console.log("query.data", query.data);
                               modifyUserAccessMutation.mutate({
                                 userId: member.id,
                                 userGroupId: query.data.id,
