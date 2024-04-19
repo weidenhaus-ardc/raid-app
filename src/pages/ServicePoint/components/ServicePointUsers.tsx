@@ -34,6 +34,8 @@ type Member = {
 
 const VITE_KEYCLOAK_URL = import.meta.env.VITE_KEYCLOAK_URL as string;
 const VITE_KEYCLOAK_REALM = import.meta.env.VITE_KEYCLOAK_REALM as string;
+const VITE_KEYCLOAK_CLIENT_ID = import.meta.env
+  .VITE_KEYCLOAK_CLIENT_ID as string;
 
 const url = `${VITE_KEYCLOAK_URL}/realms/${VITE_KEYCLOAK_REALM}/group`;
 
@@ -52,6 +54,8 @@ export default function ServicePointUsers({
       method: "GET",
       credentials: "include",
       headers: {
+        "X-Client-Id": VITE_KEYCLOAK_CLIENT_ID,
+        "Content-Type": "application/json",
         Authorization: `Bearer ${keycloak.token}`,
       },
     });
@@ -78,6 +82,7 @@ export default function ServicePointUsers({
       const response = await fetch(`${url}/${operation}`, {
         method: "PUT",
         headers: {
+          "X-Client-Id": VITE_KEYCLOAK_CLIENT_ID,
           Authorization: `Bearer ${keycloak.token}`,
           "Content-Type": "application/json",
         },

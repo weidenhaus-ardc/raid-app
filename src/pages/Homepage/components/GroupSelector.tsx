@@ -40,9 +40,13 @@ export default function GroupSelector() {
   );
 
   async function joinGroup({ groupId }: { groupId: string }) {
-    await fetch(`http://localhost:8001/realms/raid/group/join`, {
+    const url = `${import.meta.env.VITE_KEYCLOAK_URL}/realms/${
+      import.meta.env.VITE_KEYCLOAK_REALM
+    }/group/join`;
+    await fetch(url, {
       method: "PUT",
       body: JSON.stringify({ groupId }),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${keycloak.token}`,
@@ -57,7 +61,7 @@ export default function GroupSelector() {
   const joinGroupMutation = useMutation({
     mutationFn: joinGroup,
     onSuccess: () => {
-      alert("Request submitted successfully. Refreshing page.")
+      alert("Request submitted successfully. Refreshing page.");
       window.location.reload();
     },
     onError: (error) => {

@@ -101,6 +101,8 @@ export default function ServicePoints() {
   const servicePointApi = SingletonServicePointApi.getInstance();
   const { keycloak, initialized } = useCustomKeycloak();
 
+  console.log(keycloak.tokenParsed);
+
   const isOperator = keycloak.hasRealmRole("operator");
   // const isAdmin = keycloak.hasRealmRole("group_admin");
 
@@ -131,9 +133,10 @@ export default function ServicePoints() {
 
   const query = useQuery<ServicePoint[]>({
     queryKey: ["servicePoints"],
-    queryFn: isOperator
-      ? fetchAllServicePointsForOperator
-      : fetchOneServicePointForAdmin,
+    // queryFn: isOperator
+    //   ? fetchAllServicePointsForOperator
+    //   : fetchOneServicePointForAdmin,
+    queryFn: fetchAllServicePointsForOperator,
     enabled: initialized && keycloak.authenticated,
   });
 
@@ -144,6 +147,8 @@ export default function ServicePoints() {
   if (query.isError) {
     return <ErrorAlertComponent error={query.error} />;
   }
+
+  console.log(query.data);
 
   const breadcrumbs: Breadcrumb[] = [
     {
@@ -164,9 +169,7 @@ export default function ServicePoints() {
         <BreadcrumbsBar breadcrumbs={breadcrumbs} />
         <Card variant="outlined">
           <CardHeader title="Create new service point" />
-          <CardContent>
-            <ServicePointCreateForm />
-          </CardContent>
+          <CardContent>{/* <ServicePointCreateForm /> */}</CardContent>
         </Card>
 
         <DataGrid
