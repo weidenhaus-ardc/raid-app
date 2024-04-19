@@ -29,12 +29,24 @@ type KeycloakGroup = {
 };
 
 export default function GroupSelector() {
+  let environment = "dev";
+
+  if (window.location.hostname.includes("test")) {
+    environment = "test";
+  }
+
+  if (window.location.hostname.includes("demo")) {
+    environment = "demo";
+  }
+
+  if (window.location.hostname.includes("prod")) {
+    environment = "prod";
+  }
+
   const [selectedServicePointId, setSelectedServicePointId] =
     useState<string>("");
   const { keycloak } = useCustomKeycloak();
-  const currentEnvironment = import.meta.env.VITE_ENVIRONMENT
-    ? import.meta.env.VITE_ENVIRONMENT
-    : "dev";
+  const currentEnvironment = environment;
   const groupsForCurrentEnvironment: KeycloakGroup[] = groups.filter(
     (el) => el.env === currentEnvironment
   );
