@@ -142,5 +142,31 @@
     },
     "realmRoles": [],
     "clientRoles": {}
+  },
+  {
+    "env": "test",
+    "id": "3313890a-0b75-4ff7-a13a-6d9742c3ea97",
+    "name": "raid-au",
+    "path": "/raid-au",
+    "subGroupCount": 0,
+    "subGroups": [],
+    "attributes": {
+      "groupId": ["3313890a-0b75-4ff7-a13a-6d9742c3ea97"]
+    },
+    "realmRoles": [],
+    "clientRoles": {}
+  },
+  {
+    "env": "test",
+    "id": "8e3cca35-ccc6-4f40-ba2a-101f0dd5bf37",
+    "name": "uq",
+    "path": "/uq",
+    "subGroupCount": 0,
+    "subGroups": [],
+    "attributes": {
+      "groupId": ["8e3cca35-ccc6-4f40-ba2a-101f0dd5bf37"]
+    },
+    "realmRoles": [],
+    "clientRoles": {}
   }
 ]

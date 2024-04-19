@@ -47,9 +47,8 @@ export default function GroupSelector() {
     useState<string>("");
   const { keycloak } = useCustomKeycloak();
   const currentEnvironment = environment;
-  const groupsForCurrentEnvironment: KeycloakGroup[] = groups.filter(
-    (el) => el.env === currentEnvironment
-  );
+  const groupsForCurrentEnvironment: KeycloakGroup[] =
+    groups.filter((el) => el.env === currentEnvironment) || [];
 
   async function joinGroup({ groupId }: { groupId: string }) {
     const url = `${import.meta.env.VITE_KEYCLOAK_URL}/realms/${
