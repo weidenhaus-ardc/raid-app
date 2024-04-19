@@ -1,3 +1,4 @@
+import { useAuthHelper } from "@/components/useAuthHelper";
 import {
   HistoryEdu as HistoryEduIcon,
   Home as HomeIcon,
@@ -22,6 +23,7 @@ import { NavLink } from "react-router-dom";
 
 export default function NavigationDrawer() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const { isOperator, isGroupAdmin } = useAuthHelper();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setDrawerOpen(newOpen);
@@ -53,20 +55,27 @@ export default function NavigationDrawer() {
             label: "RAiDs",
             link: "/raids",
             icon: <HistoryEduIcon />,
+            hidden: false,
           },
           {
             label: "Service Points",
             link: "/service-points",
             icon: <HubIcon />,
+            hidden: !isOperator && !isGroupAdmin,
           },
           {
             label: "API Key",
             link: "/api-key",
             icon: <KeyIcon />,
+            hidden: false,
           },
         ].map((link) => (
           <ListItem key={link.link} disablePadding>
-            <ListItemButton component={NavLink} to={link.link}>
+            <ListItemButton
+              component={NavLink}
+              to={link.link}
+              disabled={link.hidden}
+            >
               <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.label} />
             </ListItemButton>

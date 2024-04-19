@@ -126,7 +126,7 @@ export default function ServicePoints() {
   }) => {
     const servicePoints: ServicePoint[] = [];
     const findServicePointByIdRequest: FindServicePointByIdRequest = {
-      id: keycloak?.tokenParsed?.service_point_group_id,
+      id: userServicePointId,
     };
     const data = await servicePointApi.findServicePointById(
       findServicePointByIdRequest,
@@ -140,12 +140,21 @@ export default function ServicePoints() {
     return servicePoints;
   };
 
+  const getDataQuery = async () => {
+    if (isOperator) {
+      return await fetchAllServicePointsForOperator();
+    } else if (isGroupAdmin) {
+      return await fetchOneServicePointForAdmin({
+        userServicePointId: userServicePointId!,
+      });
+    } else {
+      return [];
+    }
+  };
+
   const query = useQuery<ServicePoint[]>({
     queryKey: ["servicePoints"],
-    // queryFn: isOperator
-    //   ? fetchAllServicePointsForOperator
-    //   : fetchOneServicePointForAdmin,
-    queryFn: fetchAllServicePointsForOperator,
+    queryFn: getDataQuery,
     enabled: initialized && keycloak.authenticated,
   });
 
@@ -176,12 +185,14 @@ export default function ServicePoints() {
     <Container>
       <Stack direction="column" gap={2}>
         <BreadcrumbsBar breadcrumbs={breadcrumbs} />
-        <Card variant="outlined">
-          <CardHeader title="Create new service point" />
-          <CardContent>
-            <ServicePointCreateForm />
-          </CardContent>
-        </Card>
+        {isOperator && (
+          <Card variant="outlined">
+            <CardHeader title="Create new service point" />
+            <CardContent>
+              <ServicePointCreateForm />
+            </CardContent>
+          </Card>
+        )}
 
         <DataGrid
           rows={query.data || []}

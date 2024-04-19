@@ -22,6 +22,10 @@ if (window.location.hostname.includes("demo")) {
   BASE_PATH = "https://api.demo.raid.org.au".replace(/\/+$/, "");
 }
 
+if (window.location.hostname.includes("prod")) {
+  BASE_PATH = "https://api.prod.raid.org.au".replace(/\/+$/, "");
+}
+
 export interface ConfigurationParameters {
   basePath?: string; // override base path
   fetchApi?: FetchAPI; // override for fetch implementation
