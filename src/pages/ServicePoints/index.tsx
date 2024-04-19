@@ -1,6 +1,7 @@
 import SingletonServicePointApi from "@/SingletonServicePointApi";
 import BreadcrumbsBar from "@/components/BreadcrumbsBar";
 import ErrorAlertComponent from "@/components/ErrorAlertComponent";
+import { useAuthHelper } from "@/components/useAuthHelper";
 import { FindServicePointByIdRequest, ServicePoint } from "@/generated/raid";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import LoadingPage from "@/pages/LoadingPage";
@@ -101,10 +102,14 @@ export default function ServicePoints() {
   const servicePointApi = SingletonServicePointApi.getInstance();
   const { keycloak, initialized } = useCustomKeycloak();
 
-  console.log(keycloak.tokenParsed);
-
-  const isOperator = keycloak.hasRealmRole("operator");
-  // const isAdmin = keycloak.hasRealmRole("group_admin");
+  const {
+    hasServicePointGroup,
+    isServicePointUser,
+    groupId,
+    isOperator,
+    isGroupAdmin,
+    userServicePointId,
+  } = useAuthHelper();
 
   const fetchAllServicePointsForOperator = async () => {
     return await servicePointApi.findAllServicePoints({
@@ -114,7 +119,11 @@ export default function ServicePoints() {
     });
   };
 
-  const fetchOneServicePointForAdmin = async () => {
+  const fetchOneServicePointForAdmin = async ({
+    userServicePointId,
+  }: {
+    userServicePointId: number;
+  }) => {
     const servicePoints: ServicePoint[] = [];
     const findServicePointByIdRequest: FindServicePointByIdRequest = {
       id: keycloak?.tokenParsed?.service_point_group_id,
@@ -169,7 +178,9 @@ export default function ServicePoints() {
         <BreadcrumbsBar breadcrumbs={breadcrumbs} />
         <Card variant="outlined">
           <CardHeader title="Create new service point" />
-          <CardContent>{/* <ServicePointCreateForm /> */}</CardContent>
+          <CardContent>
+            <ServicePointCreateForm />
+          </CardContent>
         </Card>
 
         <DataGrid

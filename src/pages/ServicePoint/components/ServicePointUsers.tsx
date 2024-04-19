@@ -4,6 +4,8 @@ import { ServicePoint } from "@/generated/raid";
 import { useCustomKeycloak } from "@/hooks/useCustomKeycloak";
 import LoadingPage from "@/pages/LoadingPage";
 
+import { useAuthHelper } from "@/components/useAuthHelper";
+
 import { Cancel as CancelIcon, Check as CheckIcon } from "@mui/icons-material";
 import {
   Button,
@@ -54,7 +56,6 @@ export default function ServicePointUsers({
       method: "GET",
       credentials: "include",
       headers: {
-        "X-Client-Id": VITE_KEYCLOAK_CLIENT_ID,
         "Content-Type": "application/json",
         Authorization: `Bearer ${keycloak.token}`,
       },
@@ -77,12 +78,10 @@ export default function ServicePointUsers({
       userGroupId: string;
       operation: "grant" | "revoke";
     }) => {
-      console.log("userId", userId);
-      console.log("userGroupId", userGroupId);
       const response = await fetch(`${url}/${operation}`, {
         method: "PUT",
+        credentials: "include",
         headers: {
-          "X-Client-Id": VITE_KEYCLOAK_CLIENT_ID,
           Authorization: `Bearer ${keycloak.token}`,
           "Content-Type": "application/json",
         },
