@@ -144,7 +144,6 @@ export default function LoginPage() {
               </Button>
               <Button
                 startIcon={<AustraliaIcon />}
-                disabled
                 variant="contained"
                 onClick={() =>
                   keycloak.login({
@@ -170,7 +169,6 @@ export default function LoginPage() {
               </Button>
               <Button
                 startIcon={<OrcidIcon />}
-                disabled
                 variant="contained"
                 onClick={() =>
                   keycloak.login({
