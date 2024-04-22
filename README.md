@@ -1,4 +1,4 @@
-# RAiD client application
+# RAiD client application.
 
 To start developing run
 
